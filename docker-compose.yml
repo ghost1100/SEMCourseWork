@@ -1,0 +1,21 @@
+services:
+    # Application service - Dockerfile is in the same folder as this docker-compose.yml
+    app:
+        build: .
+        
+        depends_on:
+            - db
+    # MySQL database service
+    db:
+        build: World-db/.
+        image: mysql:latest
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: BkQR7Aczt  # Set root password here
+            MYSQL_DATABASE: World.sql
+        ports:
+            - "3306:3306"
+        volumes:
+            - ./World-db/World.sql:/docker-entrypoint-initdb.d/World.sql
+        
