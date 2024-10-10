@@ -13,7 +13,7 @@ services:
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: BkQR7Aczt  # Set root password here
-            MYSQL_DATABASE: World.sql
+            MYSQL_DATABASE: World
         ports:
             - "3306:3306"
         volumes:
