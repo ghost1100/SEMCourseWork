@@ -9,7 +9,7 @@ services:
     db:
         build: World-db/.
         image: mysql:latest
-        command: --default-authentication-plugin=mysql_native_password
+        #command: --default-authentication-plugin=mysql_native_password
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: BkQR7Aczt  # Set root password here
