@@ -7,6 +7,10 @@ import org.bson.Document;
 
 public class App
 {
+    /**
+     * ihmiumbiuy
+     * @param args uhuiyg
+     */
     public static void main(String[] args)
     {
         // Connect to MongoDB
