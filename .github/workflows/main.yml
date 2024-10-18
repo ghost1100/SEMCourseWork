@@ -15,6 +15,8 @@ jobs:
           distribution: 'adopt'
       - name: Compile with Maven
         run: mvn compile
+      - name: run test with Maven
+        run: mvn test
       - name: Package with Maven
         run: mvn package
       - name: Build Docker Image
