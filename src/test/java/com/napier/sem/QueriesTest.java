@@ -11,7 +11,7 @@ import java.sql.*;
 import static org.junit.jupiter.api.Assertions.*;
 class QueriesTest {
 
-    /**
+    /** Quick note: docker Desktop app must be running in the back-ground for this to work.
      * A unit test designed to test if the database connects or not.
      * it defined the connection link, username and password and
      * used driver manager to send them over to then proceed to say that the connection string isn't null,
