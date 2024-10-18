@@ -15,8 +15,18 @@ jobs:
           distribution: 'adopt'
       - name: Compile with Maven
         run: mvn compile
+        
+      - name: Unit Tests
+        run: mvn -Dtest=com.napier.sem.AppTest test
+        
       - name: Package with Maven
         run: mvn package
+        
+      - name: Package and Run docker compose
+        run: |
+          mvn package -DskipTests
+          docker compose up --abort-on-container-exit
+          
       - name: Build Docker Image
         run: docker build -t semimage .
       - name: Run image
