@@ -1,47 +1,91 @@
 package com.napier.sem;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-/**
- * this class belongs to com.napier.sem and its functionality is to run the SQL Queries after ensuring that the connection works.
- * I will implement this by using the try resources method, catch and a switch case to run each of the following requested queries.
- * first up would be testing if this idea actually works by running a query that lists out the tables in the database then the columns under said names.
- * and then adding the switch case statement each case will correspond to its own number and query,
- * the cases will first give the user the prompt connecting to database, successfully  connected, thn tables in the (Database Name) along-side listing each table name.
- * Notes/Helpful Resources:
- * Udemy Course.Learn how to connect to a MySQL database with Java JDBC
- * https://docs.oracle.com/javase/tutorial/jdbc/overview/index.html
- *https://www.javatpoint.com/steps-to-connect-to-the-database-in-java
-  **/
+import java.sql.ResultSet;
+import java.sql.DriverManager;
+import java.util.Scanner;
+import java.util.InputMismatchException;
 
+
+/**
+ * this class will be used to create an array of some sorts (will figure that out later...) to store Predetermined Queries and a switch statement to display a dew options to the user.
+ * one of the options would be to display the pre-made queries and the other option would be used to exit the app.
+ * if the user chooses option one it presents them with the queries and they can choose which one to run.
+ */
 public class Queries {
 
-    public static void  Statements() throws SQLException {
-
-//set up the try statement with resources
-        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")
-          ){
-// stmt is the statement object which is a short form of writing statement and its responsible for sending the queries to the database and executing them.
-            Statement stmt = con.createStatement();
-            String Query = "SELECT table_name FROM information_schema.tables WHERE table_schema = 'world'";
-            //rs shorter from of ResultSet which is an instance of stmt execute
-            ResultSet rs = stmt.executeQuery(Query);
-            //System.out.println(rs); instead of printing rs which will result in us printing the query we have made or specified above.
-            System.out.println("Tables in the World database:");
-            //while rs.next is used to iterate the next line until all lines are there
-            while (rs.next()) {
-              // gets the current name from the column
-                String tableName = rs.getString("table_name");
-              //this finally prints the table names.
-                System.out.println(tableName);
-            }}
-        //catch statement is used to specifically notify us of any SQL errors such as a missed line or miss matched sentence.
-catch(SQLException e) {
-    System.out.println("Error!! take a break!: " + e.getMessage());
-    // reminder not using a finally block since try resources is in use.
-}}
+   private static final String[] PREDEFINED_QUERIES = {
+           //this is where the queries would go
+        "SELECT * FROM city"
+    };
 
 
+    public static void choice() {
+        Scanner sc = new Scanner(System.in);
+        int query = 0;
+        do {
+            System.out.println("Welcome to Napier Sem Course Application");
+            System.out.println("Enter Number For Desired Query");
+            System.out.println("1.Display Available Queries");
+            System.out.println("2.exit");
+
+            try {
+                query = sc.nextInt();
+
+                switch (query) {
+                    case 1:
+                        displayQueries();
+                        int querychoice = sc.nextInt();
+                        executeQuery(querychoice - 1);
+                        break;
+                    case 2:
+                        System.out.println("exiting the application");
+                        break;
+                    default:
+                        System.out.println("Invalid Choice try again later");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("we dont accept anything but numbers");
+                sc.next();
+
+
+            }
+        } while (query != 2);
+        sc.close();
+
+
+    }
+
+private static void displayQueries() {
+    System.out.println("Available Queries");
+    for (int i = 0; i < PREDEFINED_QUERIES.length; i++) {
+        System.out.println((i + 1) + " . " + PREDEFINED_QUERIES[i]);
+    }
+    System.out.println("Select a query to run (1-" + PREDEFINED_QUERIES.length + "):");
+
+}
+        private static void executeQuery(int index){
+            if (index < 0 || index >= PREDEFINED_QUERIES.length){
+                System.out.println("Invalid Query");
+                return;
+            }
+
+            String jdbcurl = "jdbc:mysql://localhost:3306/world";
+            String username = "root";
+            String password = "BkQR7Aczt";
+
+            try(Connection Con = DriverManager.getConnection(jdbcurl, username,password);
+            Statement stmt = Con.createStatement()){
+                ResultSet rs = stmt.executeQuery(PREDEFINED_QUERIES[index]);
+                while (rs.next()) {
+                    System.out.println(rs.getString(1) + ", " + rs.getString(2));
+
+                }
+
+            }catch (SQLException e) {
+                throw new RuntimeException(e);
+
+        }
+    }
 }

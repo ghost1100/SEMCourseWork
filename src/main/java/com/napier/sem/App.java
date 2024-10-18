@@ -25,7 +25,7 @@ public class App
                 System.out.println("Successfully connected");
                 // Wait a bit
                 Thread.sleep(10000);
-                Queries.Statements();//calling another class before the break statement.
+                Queries.choice();
                 //class is named Queries and its main method is named statements
                 // I will be using this method to first wait for the connection with the database to be established then,
                  // I will send the connection string to another class to allow me to manipulate said database.
