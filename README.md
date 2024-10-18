@@ -7,4 +7,4 @@
    [![Releases](https://img.shields.io/github/release/ghost1100/SEMCourseWork/all.svg?style=flat-square)](https://github.com/ghost1100/SEMCourseWork/release)
 
 
-its failing because i need to update the main.yml file its only a few things will do it later.
+
