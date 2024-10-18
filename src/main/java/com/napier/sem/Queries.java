@@ -21,7 +21,7 @@ public class Queries {
     public static void  Statements() throws SQLException {
 
 //set up the try statement with resources
-        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/World", "root", "BkQR7Aczt")
+        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")
           ){
 // stmt is the statement object which is a short form of writing statement and its responsible for sending the queries to the database and executing them.
             Statement stmt = con.createStatement();

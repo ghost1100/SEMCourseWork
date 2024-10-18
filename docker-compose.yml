@@ -7,15 +7,15 @@ services:
             - db
     # MySQL database service
     db:
-        build: World-db/.
+        build: world-db/.
         image: mysql:latest
         #command: --default-authentication-plugin=mysql_native_password
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: BkQR7Aczt  # Set root password here
-            MYSQL_DATABASE: World
+            MYSQL_DATABASE: world
         ports:
             - "3306:3306"
         volumes:
-            - ./World-db/World.sql:/docker-entrypoint-initdb.d/World.sql
+            - ./World-db/world.sql:/docker-entrypoint-initdb.d/world.sql
         
