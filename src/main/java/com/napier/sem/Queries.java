@@ -160,13 +160,47 @@ catch(SQLException e) {
         }
     }
 
+    public static void Statement5() throws SQLException {
+        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter N: ");
+            int n = Integer.parseInt(scanner.nextLine());
+
+            String Query = "SELECT Name, Population FROM country ORDER BY Population DESC";
+            ResultSet rs = stmt.executeQuery(Query);
+
+            int count = 0;
+            while (rs.next()) {
+                String country = rs.getString("Name");
+                int population = rs.getInt("Population");
+                System.out.println(country + ": " + population);
+
+                count++;
+
+
+                if (count >= n) {
+                    break;
+                }
+            }
+
+
+            scanner.close();
+
+        } catch(SQLException e) {
+            System.out.println("Error!! take a break!: " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         try {
-            //Statements();
-            //Statement1();
-            //Statement2();
-            //Statement3();
+            Statements();
+            Statement1();
+            Statement2();
+            Statement3();
             Statement4();
+            Statement5();
         } catch(SQLException e) {
             e.printStackTrace();
         }
