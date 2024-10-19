@@ -89,11 +89,40 @@ catch(SQLException e) {
         }
     }
 
+    public static void Statement3() throws SQLException {
+        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter Region: ");
+            String choosenRegion = scanner.nextLine();
+
+
+            String Query = "SELECT Name, Population, Region FROM country ORDER BY Population DESC";
+            ResultSet rs = stmt.executeQuery(Query);
+
+            while (rs.next()) {
+
+                String country = rs.getString("Name");
+                int population = rs.getInt("Population");
+                String region = rs.getString("Region"); // Get the continent
+
+                if(region.equals(choosenRegion)) {
+                    // Print
+                    System.out.println(country + ": " + population);
+                }
+            }
+        } catch(SQLException e) {
+            System.out.println("Error!! take a break!: " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         try {
             Statements();
             Statement1();
             Statement2();
+            Statement3();
         } catch(SQLException e) {
             e.printStackTrace();
         }
