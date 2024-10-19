@@ -36,12 +36,37 @@ public class Queries {
                 String tableName = rs.getString("table_name");
               //this finally prints the table names.
                 System.out.println(tableName);
-            }}
+            }
+        }
         //catch statement is used to specifically notify us of any SQL errors such as a missed line or miss matched sentence.
 catch(SQLException e) {
     System.out.println("Error!! take a break!: " + e.getMessage());
     // reminder not using a finally block since try resources is in use.
 }}
 
+    public static void Statement1() throws SQLException {
+        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+            String Query = "SELECT Name, Population FROM country ORDER BY Population DESC";
+            ResultSet rs = stmt.executeQuery(Query);
+
+            while (rs.next()) {
+                String country = rs.getString("Name");
+                int population = rs.getInt("Population");
+                System.out.println(country + ": " + population);
+            }
+        } catch(SQLException e) {
+            System.out.println("Error!! take a break!: " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            Statements();
+            Statement1();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
