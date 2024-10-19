@@ -62,7 +62,7 @@ catch(SQLException e) {
 
     public static void main(String[] args) {
         try {
-            Statements();
+            //Statements();
             Statement1();
         } catch(SQLException e) {
             e.printStackTrace();
