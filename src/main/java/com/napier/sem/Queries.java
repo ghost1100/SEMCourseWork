@@ -17,9 +17,13 @@ public class Queries {
 
    private static final String[] PREDEFINED_QUERIES = {
            //this is where the queries would go
-        "SELECT * FROM city"
-    };
-
+           "SHOW COLUMNS FROM city",
+           "SHOW COLUMNS FROM country",
+           "SHOW COLUMNS FROM countrylanguage",
+           //shows the columns helps me remember
+           //first one done.
+           "SELECT *  FROM city order by population DESC ",
+   };
 
     public static void choice() {
         Scanner sc = new Scanner(System.in);
