@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 /**
  * this class belongs to com.napier.sem and its functionality is to run the SQL Queries after ensuring that the connection works.
  * I will implement this by using the try resources method, catch and a switch case to run each of the following requested queries.
@@ -60,10 +61,39 @@ catch(SQLException e) {
         }
     }
 
+    public static void Statement2() throws SQLException {
+        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter Continent: ");
+            String choosenContient = scanner.nextLine();
+
+
+            String Query = "SELECT Name, Population, Continent FROM country ORDER BY Population DESC";
+            ResultSet rs = stmt.executeQuery(Query);
+
+            while (rs.next()) {
+
+                String country = rs.getString("Name");
+                int population = rs.getInt("Population");
+                String continent = rs.getString("Continent"); // Get the continent
+
+                if(continent.equals(choosenContient)) {
+                    // Print the city name, population, and continent
+                    System.out.println(country + ": " + population);
+                }
+            }
+        } catch(SQLException e) {
+            System.out.println("Error!! take a break!: " + e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         try {
             Statements();
             Statement1();
+            Statement2();
         } catch(SQLException e) {
             e.printStackTrace();
         }
