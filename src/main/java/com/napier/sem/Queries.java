@@ -16,17 +16,19 @@ import java.util.InputMismatchException;
 public class Queries {
 
    private static final String[] PREDEFINED_QUERIES = {
-           //this is where the queries would go
-           "SHOW COLUMNS FROM city",
+           ///this is where the queries would go
+           "SHOW COLUMNS FROM city",///added these queries because it would help with generating the others because SQL is case-sensitive.
            "SHOW COLUMNS FROM country",
            "SHOW COLUMNS FROM countrylanguage",
-           //shows the columns helps me remember
-           //first one done.
+           ///first one done displays all cities and orders it by population from smallest to largest using the desc function.
            "SELECT *  FROM city order by population DESC ",
+
+
    };
 
     public static void choice() {
         Scanner sc = new Scanner(System.in);
+        ///created an instance of the scanner object which would be used to detect the user's input and named it sc.
         int query = 0;
         do {
             System.out.println("Welcome to Napier Sem Course Application");
@@ -52,7 +54,7 @@ public class Queries {
             } catch (InputMismatchException e) {
                 System.out.println("we dont accept anything but numbers");
                 sc.next();
-
+///added some error management feature using the catch statement.
 
             }
         } while (query != 2);

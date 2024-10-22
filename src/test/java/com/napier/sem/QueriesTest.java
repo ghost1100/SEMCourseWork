@@ -19,6 +19,7 @@ class QueriesTest {
      if the connection fails then its indicated by the fail method along-side a message informing the user as to why it failed
      below it will be another test case to ensure that we can extract information out of this database.
      */
+
     @Test
     public void TestDataConnection() {
         String jdbcurl = "jdbc:mysql://localhost:3306/world";

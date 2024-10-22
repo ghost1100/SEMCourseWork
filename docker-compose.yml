@@ -18,4 +18,4 @@ services:
             - "3306:3306"
         volumes:
             - ./World-db/world.sql:/docker-entrypoint-initdb.d/world.sql
-        
+     
