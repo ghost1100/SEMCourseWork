@@ -55,7 +55,7 @@ public class Queries {
                 System.out.println("we dont accept anything but numbers");
                 sc.next();
 ///added some error management feature using the catch statement.
-
+/// could add another statement later to allow the user to add their own inputs to customise their own query for example the ones where the user enters the number of population or language itself...
             }
         } while (query != 2);
         sc.close();
