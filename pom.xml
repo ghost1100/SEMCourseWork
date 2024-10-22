@@ -42,12 +42,8 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0</version>
-                <configuration>
-                    <Includes>
-                        <Include>**/*Test.java</Include>
-                    </Includes>
-                </configuration>
+                <version>3.2.5</version>
+                
                 <dependencies>
                     <dependency>
                         <groupId>org.junit.platform</groupId>
@@ -73,7 +69,7 @@
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-api</artifactId>
                 <version>5.1.0</version>
-                <scope>test</scope>
+                <scope>Test</scope>
             </dependency>
         </dependencies>
     
