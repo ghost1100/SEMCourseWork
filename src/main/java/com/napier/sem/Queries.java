@@ -21,7 +21,18 @@ public class Queries {
             "SHOW COLUMNS FROM country",
             "SHOW COLUMNS FROM countrylanguage",
             ///first one done displays all cities and orders it by population from smallest to largest using the desc function.
+    //Ahmed.
+            // selects every city based on most populated first, Issue Number 9...
             "SELECT *  FROM city order by population DESC ",
+            //selects the most popular cities in a continent this time its Asia, Issue Number 10...
+            " SELECT city.Name, city.CountryCode, city.District, city.Population  FROM city INNER JOIN country ON city.CountryCode = country.Code Where country.Continent = 'Asia' ORDER BY population DESC ",
+            // selects the most popular Cities in a District, Issue Number 13...
+            " SELECT city.Name, city.CountryCode, city.Population  FROM city INNER JOIN country ON city.CountryCode = country.Code Where city.District = 'Scotland' ORDER BY population DESC ",
+            //all the cities in a country from the largest population to smallest in this case its france, Issue Number 12...
+            "SELECT city.Name, city.CountryCode, city.Population  FROM city INNER JOIN country ON city.CountryCode = country.Code Where country.Name = 'France' ORDER BY population DESC",
+            // All the cities in a region organised by largest population to the smallest, Issue Number 11...last query to add.
+
+
 
 
     };
