@@ -1,9 +1,5 @@
 package com.napier.sem;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
-import java.sql.DriverManager;
+import java.sql.*;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
@@ -11,7 +7,10 @@ import java.util.InputMismatchException;
 /**
  * this class will be used to create an array of some sorts (will figure that out later...) to store Predetermined Queries and a switch statement to display a dew options to the user.
  * one of the options would be to display the pre-made queries and the other option would be used to exit the app.
- * if the user chooses option one it presents them with the queries and they can choose which one to run.
+ * if the user chooses option one it presents them with the queries and, they can choose which one to run.
+ * might try to implement parameterised queries...
+ * after starting this project I have realised that c#  is much more flexible than java and that i at least don't have to define everything over and over or add any dependencies but in all honesty java seems more interesting feels like it has no limits
+ *
  */
 public class Queries {
 
@@ -34,7 +33,8 @@ public class Queries {
             System.out.println("Welcome to Napier Sem Course Application");
             System.out.println("Enter Number For Desired Query");
             System.out.println("1.Display Available Queries");
-            System.out.println("2.exit");
+            System.out.println("2.Create Your Own Queries");
+            System.out.println("3.Exit APP");
 
             try {
                 query = sc.nextInt();
@@ -46,6 +46,10 @@ public class Queries {
                         executeQuery(querychoice - 1);
                         break;
                     case 2:
+                        System.out.println("Create your own query");// allows the user the option to choose a city name and it will list out the city's details i plan to build up on this by using the sql join method to display the language and other similar details.
+                        CreateCityQueries();
+                        break;
+                    case 3:
                         System.out.println("exiting the application");
                         break;
                     default:
@@ -57,7 +61,7 @@ public class Queries {
 ///added some error management feature using the catch statement.
 /// could add another statement later to allow the user to add their own inputs to customise their own query for example the ones where the user enters the number of population or language itself...
             }
-        } while (query != 2);
+        } while (query != 3);///ensures that the app doesn't close unless user asks it to do so.
         sc.close();
 
 
@@ -92,6 +96,35 @@ private static void displayQueries() {
             }catch (SQLException e) {
                 throw new RuntimeException(e);
 
+
+    }
+
+              }
+    private static void CreateCityQueries() {
+       Scanner sc = new Scanner(System.in);
+       System.out.println("Enter City Name");
+       String Name = sc.nextLine();
+       String query = "SELECT ID, Name, CountryCode, District, Population FROM city WHERE Name LIKE ?";// the ? is used as a place-holder to mark where the scanners input will be placed
+//database information
+        String jdbcurl = "jdbc:mysql://localhost:3306/world";
+        String username = "root";
+        String password = "BkQR7Aczt";
+        //try method used to link database information with the driver manager.
+        try(Connection Con = DriverManager.getConnection(jdbcurl, username,password);
+            PreparedStatement pstmt = Con.prepareStatement(query)){
+            // this is saying the prepared statement is equal to the query plus the users input which relies on the scanner object
+              pstmt.setString(1,"%" + Name + "%");// the % is used for pattern matching the pattern used here is name as long as the letters match it shouldn't be concerned if the name is in upper or lower case.
+//the parameter index is one meaning this is the one and only input we will accept from the user at the moment we can tinker about with that later to add more features when the join elements are implemented.
+              ResultSet rs = pstmt.executeQuery();
+              while (rs.next()) {
+                  System.out.println(rs.getString(1)+" ID" + ", " + rs.getString(2)+ " Name" + ", " + rs.getString(3) + " CountryCode" + ", " + rs.getString(4) +" District" + ", " + rs.getString(5) +" Population" );
+              }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
         }
     }
-}

@@ -9,7 +9,8 @@ import org.junit.jupiter.api.Test;
 import java.sql.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-class QueriesTest {
+
+public class Queriestest {
 
     /** Quick note: docker Desktop app must be running in the back-ground for this to work.
      * A unit test designed to test if the database connects or not.
@@ -49,7 +50,7 @@ class QueriesTest {
             ResultSet rs = stmt.executeQuery(Query);
 
             System.out.println("Tables in the World database:");
-           int TableCount = 0;
+            int TableCount = 0;
 
 
             while (rs.next()) {
@@ -58,8 +59,8 @@ class QueriesTest {
 
                 System.out.println(tableName);
                 System.out.println("Connection Successful");
-assertNotNull(tableName,"Table Name Should Not Be Null");
-TableCount++;
+                assertNotNull(tableName,"Table Name Should Not Be Null");
+                TableCount++;
             }
             assertTrue(TableCount > 0);
             System.out.println("Connection and Data Extraction Was A Success. :)");
