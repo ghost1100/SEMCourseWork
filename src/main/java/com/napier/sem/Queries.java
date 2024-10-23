@@ -10,7 +10,8 @@ import java.util.InputMismatchException;
  * if the user chooses option one it presents them with the queries and, they can choose which one to run.
  * might try to implement parameterised queries...
  * after starting this project I have realised that c#  is much more flexible than java and that i at least don't have to define everything over and over or add any dependencies but in all honesty java seems more interesting feels like it has no limits
- *
+ * I will use 2 formats of commenting the // to make comments which i don't want to stand out as much and the ///for green comments that I want to see.
+ * the third format is just this which should be on-top of every method or class.
  */
 public class Queries {
 
