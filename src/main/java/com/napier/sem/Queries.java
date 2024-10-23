@@ -35,7 +35,10 @@ public class Queries {
             System.out.println("1.Display Available Queries");
             System.out.println("2.Create Your Own Queries");
             System.out.println("3.Exit APP");
-
+// number 1 which is display available queries is basically a dynamic switch case within a static one allowing me to modify its length at any time without having to go and change the numbers over and over like a static one would.
+   //it mostly relies on the for loop as long as the input is bigger than i but smaller than the predefined list it will increment I and execute the query in the list
+            //then there is the if statement saying if the index which == predefined queries is smaller than 0 which = I then the choice isn't valid which is an error detection and handling method.
+            // it also invalidates the users choice if it turns out to be bigger than the specified index
             try {
                 query = sc.nextInt();
 
@@ -46,7 +49,7 @@ public class Queries {
                         executeQuery(querychoice - 1);
                         break;
                     case 2:
-                        System.out.println("Create your own query");// allows the user the option to choose a city name and it will list out the city's details i plan to build up on this by using the sql join method to display the language and other similar details.
+                        System.out.println("Create your own query");// allows the user the option to choose a city name and, it will list out the city's details i plan to build up on this by using the sql join method to display the language and other similar details.
                         CreateCityQueries();
                         break;
                     case 3:
