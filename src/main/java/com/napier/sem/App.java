@@ -22,7 +22,7 @@ public class App
                 Thread.sleep(30000);
                 // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt");
-                System.out.println("Successfully connected");
+                System.out.println("You have successfully connected");
                 // Wait a bit
                 Thread.sleep(10000);
                 Queries.Statements();//calling another class before the break statement.
