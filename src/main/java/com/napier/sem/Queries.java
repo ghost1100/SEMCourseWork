@@ -319,6 +319,6 @@ break;
             }
         } catch(SQLException e) {
             System.out.println("Error!! take a break!: " + e.getMessage());
-        }
+        }// instead of using an array or switch case within a switch case again i took the lazy route by just adding if statements and a catch at the end.
     }
 }
