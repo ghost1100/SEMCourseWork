@@ -13,20 +13,14 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
+      - name: Clean with Maven
+        run: mvn clean
       - name: Compile with Maven
         run: mvn compile
-        
-      - name: Unit Tests
-        run: mvn -Dtest=com.napier.sem.AppTest test
-        
+      - name: run test with Maven
+        run: mvn test
       - name: Package with Maven
         run: mvn package
-        
-      - name: Package and Run docker compose
-        run: |
-          mvn package -DskipTests
-          docker compose up --abort-on-container-exit
-          
       - name: Build Docker Image
         run: docker build -t semimage .
       - name: Run image
