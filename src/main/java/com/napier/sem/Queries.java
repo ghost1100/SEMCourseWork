@@ -47,7 +47,8 @@ public class Queries {
             System.out.println("1.Display Available Queries");
             System.out.println("2.Create Your Own City Queries");
             System.out.println("3.Create Your Own Country Queries");
-            System.out.println("4.Exit APP");
+            System.out.println("4.Rachel's Queries");
+            System.out.println("5.Exit APP");
 // number 1 which is display available queries is basically a dynamic switch case within a static one allowing me to modify its length at any time without having to go and change the numbers over and over like a static one would.
             //it mostly relies on the for loop as long as the input is bigger than i but smaller than the predefined list it will increment I and execute the query in the list
             //then there is the if statement saying if the index which == predefined queries is smaller than 0 which = I then the choice isn't valid which is an error detection and handling method.
@@ -70,13 +71,28 @@ public class Queries {
                         CreateQueries();
                         break;
                     case 4:
+                        // Rachel, please edit the "" Statements later to display what the number of the issue is along side what it does.
+                        // like this: the N of City in the Country Where user provides \N, Issue #15
+System.out.println("please choose which query you'd like to run");
+System.out.println("1.");
+System.out.println("2.");
+System.out.println("3.");
+System.out.println("4.");
+System.out.println("5.SELECT Name, Population FROM country ORDER BY Population DESC ");
+int Num = sc.nextInt();
+if (Num == 5) {
+    Statement5();
+}
+
+                        break;
+                    case 5:
                         System.out.println("exiting the application");
                         break;
 
                     default:
                         System.out.println("Invalid Choice try again later");
                 }
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException | SQLException e) {
                 System.out.println("we dont accept anything but numbers");
                 sc.next();
 ///added some error management feature using the catch statement.
@@ -132,7 +148,7 @@ public class Queries {
         String jdbcurl = "jdbc:mysql://localhost:3306/world";
         String username = "root";
         String password = "BkQR7Aczt";
-        //try method used to link database information with the driver manager.
+        //try the method used to link database information with the driver manager.
         try (Connection Con = DriverManager.getConnection(jdbcurl, username, password);
              PreparedStatement pstmt = Con.prepareStatement(query)) {
             // this is saying the prepared statement is equal to the query plus the users input which relies on the scanner object
@@ -177,4 +193,28 @@ public class Queries {
             throw new RuntimeException(e);
         }
     }
+    public static void Statement5() throws SQLException {
+        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter N: ");
+            int n = Integer.parseInt(scanner.nextLine());
+            String Query = "SELECT Name, Population FROM country ORDER BY Population DESC";
+            ResultSet rs = stmt.executeQuery(Query);
+            int count = 0;
+            while (rs.next()) {
+                String country = rs.getString("Name");
+                int population = rs.getInt("Population");
+                System.out.println(country + ": " + population);
+                count++;
+                if (count >= n) {
+                    break;
+                }
+            }
+            scanner.close();
+        } catch(SQLException e) {
+            System.out.println("Error!! take a break!: " + e.getMessage());
+        }
+    }
+
 }

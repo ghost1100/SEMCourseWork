@@ -20,13 +20,13 @@ public class App
             try {
                 // Wait a bit for db to start
                // Thread.sleep(30000);              commented it out to allow me to work faster
-                // Connect to database
+                // Connect to a database
                 con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt");
                 System.out.println("Successfully connected");
                 // Wait a bit
                 Thread.sleep(100); // made this shorter to work faster as well missing one extra zero
                 Queries.choice();
-                //class is named Queries and its main method is named statements
+                //class is named Queries, and its main method is named statements
                 // I will be using this method to first wait for the connection with the database to be established then,
                  // I will send the connection string to another class to allow me to manipulate said database.
                 // Exit for loop
