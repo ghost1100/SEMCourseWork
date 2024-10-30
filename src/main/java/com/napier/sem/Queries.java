@@ -1,7 +1,8 @@
 package com.napier.sem;
+
 import java.sql.*;
-import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.Scanner;
 
 
 /**
@@ -31,7 +32,8 @@ public class Queries {
             //all the cities in a country from the largest population to smallest in this case its france, Issue Number 12...
             "SELECT city.Name, city.CountryCode, city.Population  FROM city INNER JOIN country ON city.CountryCode = country.Code Where country.Name = 'France' ORDER BY population DESC",
             // All the cities in a region organised by largest population to the smallest, Issue Number 11...last query to add.
-
+//Erin
+            "SELECT *  FROM country order by population DESC ",
 
 
 
