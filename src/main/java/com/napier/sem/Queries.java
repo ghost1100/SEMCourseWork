@@ -1,4 +1,5 @@
 package com.napier.sem;
+import java.awt.*;
 import java.sql.*;
 import java.util.Scanner;
 import java.util.InputMismatchException;
@@ -74,17 +75,37 @@ public class Queries {
                         // Rachel, please edit the "" Statements later to display what the number of the issue is along side what it does.
                         // like this: the N of City in the Country Where user provides \N, Issue #15
 System.out.println("please choose which query you'd like to run");
-System.out.println("1.");
-System.out.println("2.");
-System.out.println("3.");
-System.out.println("4.");
+System.out.println("1.SELECT Name, Population FROM country ORDER BY Population DESC");
+System.out.println("2.SELECT Name, Population, Continent FROM country ORDER BY Population DESC");
+System.out.println("3.SELECT Name, Population, Region FROM country ORDER BY Population DESC");
+System.out.println("4.SELECT Name, Population, Continent FROM country ORDER BY Population DESC");
 System.out.println("5.SELECT Name, Population FROM country ORDER BY Population DESC ");
 int Num = sc.nextInt();
 if (Num == 5) {
     Statement5();
+    choice();
 }
-
-                        break;
+if (Num == 4) {
+    Statement4();
+    choice();
+}
+if (Num == 3) {
+    Statement3();
+    choice();
+}
+if (Num == 2) {
+    Statement2();
+    choice();
+}
+if (Num == 1) {
+    Statement1();
+    choice();
+}
+else {
+    System.out.println("Please enter a valid number");
+    choice();
+}
+break;
                     case 5:
                         System.out.println("exiting the application");
                         break;
@@ -216,5 +237,88 @@ if (Num == 5) {
             System.out.println("Error!! take a break!: " + e.getMessage());
         }
     }
-
+    public static void Statement4() throws SQLException {
+        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter Continent: ");
+            String choosenContinent = scanner.nextLine();
+            System.out.print("Enter N: ");
+            int n = Integer.parseInt(scanner.nextLine());
+            String Query = "SELECT Name, Population, Continent FROM country ORDER BY Population DESC";
+            ResultSet rs = stmt.executeQuery(Query);
+            int count = 0;
+            while (rs.next()) {
+                String country = rs.getString("Name");
+                int population = rs.getInt("Population");
+                String continent = rs.getString("Continent");
+                if (continent.equals(choosenContinent)) {
+                    System.out.println(country + ": " + population);
+                    count++;
+                }
+                if (count >= n) {
+                    break;
+                }
+            }
+            scanner.close();
+        } catch(SQLException e) {
+            System.out.println("Error!! take a break!: " + e.getMessage());
+        }
+    }
+    public static void Statement3() throws SQLException {
+        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter Region: ");
+            String choosenRegion = scanner.nextLine();
+            String Query = "SELECT Name, Population, Region FROM country ORDER BY Population DESC";
+            ResultSet rs = stmt.executeQuery(Query);
+            while (rs.next()) {
+                String country = rs.getString("Name");
+                int population = rs.getInt("Population");
+                String region = rs.getString("Region"); // Get the continent
+                if(region.equals(choosenRegion)) {
+                    // Print
+                    System.out.println(country + ": " + population);
+                }
+            }
+        } catch(SQLException e) {
+            System.out.println("Error!! take a break!: " + e.getMessage());
+        }
+    }
+    public static void Statement2() throws SQLException {
+        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter Continent: ");
+            String choosenContient = scanner.nextLine();
+            String Query = "SELECT Name, Population, Continent FROM country ORDER BY Population DESC";
+            ResultSet rs = stmt.executeQuery(Query);
+            while (rs.next()) {
+                String country = rs.getString("Name");
+                int population = rs.getInt("Population");
+                String continent = rs.getString("Continent"); // Get the continent
+                if(continent.equals(choosenContient)) {
+                    // Print the city name, population, and continent
+                    System.out.println(country + ": " + population);
+                }
+            }
+        } catch(SQLException e) {
+            System.out.println("Error!! take a break!: " + e.getMessage());
+        }
+    }
+    public static void Statement1() throws SQLException {
+        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+            String Query = "SELECT Name, Population FROM country ORDER BY Population DESC";
+            ResultSet rs = stmt.executeQuery(Query);
+            while (rs.next()) {
+                String country = rs.getString("Name");
+                int population = rs.getInt("Population");
+                System.out.println(country + ": " + population);
+            }
+        } catch(SQLException e) {
+            System.out.println("Error!! take a break!: " + e.getMessage());
+        }
+    }
 }
