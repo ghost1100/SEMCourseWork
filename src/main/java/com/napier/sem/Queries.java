@@ -15,7 +15,7 @@ import java.util.InputMismatchException;
  */
 public class Queries {
 
-    private static final String[] PREDEFINED_QUERIES = {
+    public static final String[] PREDEFINED_QUERIES = {
             ///this is where the queries would go
             "SHOW COLUMNS FROM city",///added these queries because it would help with generating the others because SQL is case-sensitive.
             "SHOW COLUMNS FROM country",
