@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class unittest {
 
     //Test Case to ensure that it returns what the user expects.
-    @Test
+    @Test// tests the query return if the query doesn't exist returns an error instead.
     public void testQueryValidChoices() {
 
         int QueryIndex = 2;
