@@ -16,11 +16,7 @@ import java.util.InputMismatchException;
 public class Queries {
 
     public static final String[] PREDEFINED_QUERIES = {
-            ///this is where the queries would go
-            "SHOW COLUMNS FROM city",///added these queries because it would help with generating the others because SQL is case-sensitive.
-            "SHOW COLUMNS FROM country",
-            "SHOW COLUMNS FROM countrylanguage",
-            ///first one done displays all cities and orders it by population from smallest to largest using the desc function.
+            ///this is where the queries would go.
     //Ahmed.
             // selects every city based on most populated first, Issue Number 9...
             "SELECT *  FROM city order by population DESC ",
@@ -49,7 +45,8 @@ public class Queries {
             System.out.println("2.Create Your Own City Queries");
             System.out.println("3.Create Your Own Country Queries");
             System.out.println("4.Rachel's Queries");
-            System.out.println("5.Exit APP");
+            System.out.println("5.Robbie's Queries");
+            System.out.println("6.Exit APP");
 // number 1 which is display available queries is basically a dynamic switch case within a static one allowing me to modify its length at any time without having to go and change the numbers over and over like a static one would.
             //it mostly relies on the for loop as long as the input is bigger than i but smaller than the predefined list it will increment I and execute the query in the list
             //then there is the if statement saying if the index which == predefined queries is smaller than 0 which = I then the choice isn't valid which is an error detection and handling method.
@@ -107,6 +104,34 @@ else {
 }
 break;
                     case 5:
+System.out.println("please choose which query you'd like to run");
+int Num2 = sc.nextInt();
+if (Num2 == 5) {
+    Statement5();
+    choice();
+}
+if (Num2 == 4) {
+    Statement4();
+    choice();
+}
+if (Num2 == 3) {
+    Statement3();
+    choice();
+}
+if (Num2 == 2) {
+    Statement2();
+    choice();
+}
+if (Num2 == 1) {
+    Statement1();
+    choice();
+}
+else {
+    System.out.println("Please enter a valid number");
+    choice();
+}
+                        break;
+                    case 6:
                         System.out.println("exiting the application");
                         break;
 
