@@ -357,7 +357,9 @@ else {
     public static void Statement6() throws SQLException {
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
-            String Query = "SELECT Name, Population FROM city WHERE IsCapital = true ORDER BY Population DESC"; // select query which will get the name and city which is a capital and will order it by the population
+            String Query = "SELECT city.Name, city.Population FROM country " +
+                    "JOIN city ON country.Capital = city.ID " +
+                    "ORDER BY city.Population DESC";
             ResultSet rs = stmt.executeQuery(Query);
             while (rs.next()) {
                 String city = rs.getString("Name"); // will get the name from the column name
@@ -369,13 +371,14 @@ else {
             System.out.println("Error!! take a break!: " + e.getMessage());
         }
     }
+
     public static void Statement7() throws SQLException {
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
             System.out.print("Enter Region: ");
             String choosenRegion = scanner.nextLine();
-            String Query = "SELECT Name, Population FROM city WHERE IsCapital = true AND Region = '" + choosenRegion + "' ORDER BY Population DESC"; // select query which will get the name and population from the city table which the capital is in the region which is inputed
+            String Query = "SELECT Name, Population FROM country WHERE Capital = true AND Region = '" + choosenRegion + "' ORDER BY Population DESC"; // select query which will get the name and population from the city table which the capital is in the region which is inputed
             ResultSet rs = stmt.executeQuery(Query);
             while (rs.next()) {
                 String city = rs.getString("Name");
@@ -393,7 +396,7 @@ else {
             Scanner scanner = new Scanner(System.in);
             System.out.print("Enter the capital city to retrieve: ");
             int N = scanner.nextInt();
-            String Query = "SELECT Name, Population FROM city WHERE IsCapital = true ORDER BY Population DESC LIMIT " + N; // select statement
+            String Query = "SELECT Name, Population FROM country WHERE Capital = true ORDER BY Population DESC LIMIT " + N; // select statement
             ResultSet rs = stmt.executeQuery(Query);
             while (rs.next()) {
                 String city = rs.getString("Name");
@@ -411,7 +414,7 @@ else {
             Scanner scanner = new Scanner(System.in);
             System.out.print("Enter Region: ");
             String choosenRegion = scanner.nextLine();
-            String Query = "SELECT Name, Population FROM city WHERE IsCapital = true AND Continent = '" + choosenRegion + "' ORDER BY Population DESC";
+            String Query = "SELECT Name, Population FROM country WHERE Capital = true AND Continent = '" + choosenRegion + "' ORDER BY Population DESC";
             ResultSet rs = stmt.executeQuery(Query);
             while (rs.next()) {
                 String city = rs.getString("Name"); // this will get the string name from the column name
@@ -432,7 +435,7 @@ else {
             scanner.nextLine();  // Consume newline
             System.out.print("Enter the continent: "); // user input allowing user to enter a continent
             String continent = scanner.nextLine();
-            String Query = "SELECT Name, Population FROM city WHERE IsCapital = true AND Continent = '" + continent + "' ORDER BY Population DESC LIMIT " + N;
+            String Query = "SELECT Name, Population FROM country WHERE Capital = true AND Continent = '" + continent + "' ORDER BY Population DESC LIMIT " + N;
             ResultSet rs = stmt.executeQuery(Query);
             while (rs.next()) {
                 String city = rs.getString("Name"); // will get the name from the column name
