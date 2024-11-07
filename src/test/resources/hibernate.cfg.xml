@@ -2,3 +2,15 @@
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD 5.3//EN"
         "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hbm2ddl.auto">update</property>
+        <property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
+        <property name="connection.url">jdbc:mysql://localhost/TUTORIALSPOINT</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">guest123</property>
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+    </session-factory>
+
+</hibernate-configuration>
