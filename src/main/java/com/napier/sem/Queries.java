@@ -15,12 +15,8 @@ import java.util.InputMismatchException;
  */
 public class Queries {
 
-    private static final String[] PREDEFINED_QUERIES = {
-            ///this is where the queries would go
-            "SHOW COLUMNS FROM city",///added these queries because it would help with generating the others because SQL is case-sensitive.
-            "SHOW COLUMNS FROM country",
-            "SHOW COLUMNS FROM countrylanguage",
-            ///first one done displays all cities and orders it by population from smallest to largest using the desc function.
+    public static final String[] PREDEFINED_QUERIES = {
+            ///this is where the queries would go.
     //Ahmed.
             // selects every city based on most populated first, Issue Number 9...
             "SELECT *  FROM city order by population DESC ",
@@ -49,7 +45,8 @@ public class Queries {
             System.out.println("2.Create Your Own City Queries");
             System.out.println("3.Create Your Own Country Queries");
             System.out.println("4.Rachel's Queries");
-            System.out.println("5.Exit APP");
+            System.out.println("5.Robbie's Queries");
+            System.out.println("6.Exit APP");
 // number 1 which is display available queries is basically a dynamic switch case within a static one allowing me to modify its length at any time without having to go and change the numbers over and over like a static one would.
             //it mostly relies on the for loop as long as the input is bigger than i but smaller than the predefined list it will increment I and execute the query in the list
             //then there is the if statement saying if the index which == predefined queries is smaller than 0 which = I then the choice isn't valid which is an error detection and handling method.
@@ -72,14 +69,14 @@ public class Queries {
                         CreateQueries();
                         break;
                     case 4:
-                        // Rachel, please edit the "" Statements later to display what the number of the issue is along side what it does.
+                        // Rachel, please edit the "" Statements later to display what the number of the issue is alongside what it does.
                         // like this: the N of City in the Country Where user provides \N, Issue #15
 System.out.println("please choose which query you'd like to run");
-System.out.println("1. All the countries in the world organised by largest population to smallest report #19");
-System.out.println("2. All the countries in a continent organised by largest population to smallest report #20");
-System.out.println("3.All the countries in a region organised by largest population to smallest report #21");
-System.out.println("4.The top N populated countries in a continent where N is provided by the user #23");
-System.out.println("5.The top N populated countries in the world where N is provided by the user #22 ");
+System.out.println("1.SELECT Name, Population FROM country ORDER BY Population DESC");
+System.out.println("2.SELECT Name, Population, Continent FROM country ORDER BY Population DESC");
+System.out.println("3.SELECT Name, Population, Region FROM country ORDER BY Population DESC");
+System.out.println("4.SELECT Name, Population, Continent FROM country ORDER BY Population DESC");
+System.out.println("5.SELECT Name, Population FROM country ORDER BY Population DESC ");
 int Num = sc.nextInt();
 if (Num == 5) {
     Statement5();
@@ -106,7 +103,43 @@ else {
     choice();
 }
 break;
-                    case 5:
+                    case 5: ///I choose the easiest way to include all the code by just having if statements inside the switch case so its static instead of dynamic
+                        // Robbie, please edit the "" Statements later to display what the number of the issue is alongside what it does.
+                        // like this: the N of City in the Country Where user provides \N, Issue #15
+System.out.println("please choose which query you'd like to run");
+                        System.out.println("SELECT Name, Population FROM city WHERE IsCapital = true ORDER BY Population DESC");
+                        System.out.println("SELECT Name, Population FROM city WHERE IsCapital = true AND Region = '\" + choosenRegion + \"' ORDER BY Population DESC\"");
+                        System.out.println("SELECT Name, Population FROM city WHERE IsCapital = true ORDER BY Population DESC LIMIT \" + N;");
+                        System.out.println("SELECT Name, Population FROM city WHERE IsCapital = true AND Continent = '\" + choosenRegion + \"' ORDER BY Population DESC");
+                        System.out.println("SELECT Name, Population FROM city WHERE IsCapital = true AND Continent = '\" + continent + \"' ORDER BY Population DESC LIMIT \" + N");
+
+                        int Num2 = sc.nextInt();
+if (Num2 == 5) {
+    Statement10();
+    choice();
+}
+if (Num2 == 4) {
+    Statement9();
+    choice();
+}
+if (Num2 == 3) {
+    Statement8();
+    choice();
+}
+if (Num2 == 2) {
+    Statement7();
+    choice();
+}
+if (Num2 == 1) {
+    Statement6();
+    choice();
+}
+else {
+    System.out.println("Please enter a valid number");
+    choice();
+}
+                        break;
+                    case 6:
                         System.out.println("exiting the application");
                         break;
 
@@ -214,58 +247,40 @@ break;
             throw new RuntimeException(e);
         }
     }
-
-    //The top N populated countries in the world where N is provided by the user #22
     public static void Statement5() throws SQLException {
-        //open database
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
-            //get the number from the user
             System.out.print("Enter N: ");
             int n = Integer.parseInt(scanner.nextLine());
-            //implement SQL query
             String Query = "SELECT Name, Population FROM country ORDER BY Population DESC";
-            //execute query
             ResultSet rs = stmt.executeQuery(Query);
-            //initialise count to 0
             int count = 0;
-            //loop to print the N number of counties and their population
             while (rs.next()) {
                 String country = rs.getString("Name");
                 int population = rs.getInt("Population");
                 System.out.println(country + ": " + population);
                 count++;
-                //if the count exceeds N then break the loop
                 if (count >= n) {
                     break;
                 }
             }
-            //error message
+            scanner.close();
         } catch(SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error!! take a break!: " + e.getMessage());
         }
     }
-
-    //The top N populated countries in a continent where N is provided by the user #23
     public static void Statement4() throws SQLException {
-        //open database
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
-            //Get the desired contient from the user
             System.out.print("Enter Continent: ");
             String choosenContinent = scanner.nextLine();
-            //get N from the user
             System.out.print("Enter N: ");
             int n = Integer.parseInt(scanner.nextLine());
-            //implement SQL query
             String Query = "SELECT Name, Population, Continent FROM country ORDER BY Population DESC";
-            //execute query
             ResultSet rs = stmt.executeQuery(Query);
-            //initialise count
             int count = 0;
-            //loop to print N populated countries in a continent
             while (rs.next()) {
                 String country = rs.getString("Name");
                 int population = rs.getInt("Population");
@@ -274,58 +289,44 @@ break;
                     System.out.println(country + ": " + population);
                     count++;
                 }
-                //if the count exceeds N then break the loop
                 if (count >= n) {
                     break;
                 }
             }
-            //error message
+            scanner.close();
         } catch(SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error!! take a break!: " + e.getMessage());
         }
     }
-
-    //All the countries in a region organised by largest population to smallest report #21
     public static void Statement3() throws SQLException {
-        //open database
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
-            //get the desired region from the user
             System.out.print("Enter Region: ");
             String choosenRegion = scanner.nextLine();
-            //implement SQL query
             String Query = "SELECT Name, Population, Region FROM country ORDER BY Population DESC";
-            //execute query
             ResultSet rs = stmt.executeQuery(Query);
-            //Loop to print all the countries in a region
             while (rs.next()) {
                 String country = rs.getString("Name");
                 int population = rs.getInt("Population");
                 String region = rs.getString("Region"); // Get the continent
                 if(region.equals(choosenRegion)) {
+                    // Print
                     System.out.println(country + ": " + population);
                 }
             }
-            //error message
         } catch(SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error!! take a break!: " + e.getMessage());
         }
     }
-
-    //All the countries in a continent organised by largest population to smallest report #20
     public static void Statement2() throws SQLException {
-        //open database
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
-            //get contient from user
             System.out.print("Enter Continent: ");
             String choosenContient = scanner.nextLine();
-            //implement SQL query
             String Query = "SELECT Name, Population, Continent FROM country ORDER BY Population DESC";
             ResultSet rs = stmt.executeQuery(Query);
-            //loop to print all the countries in a continent
             while (rs.next()) {
                 String country = rs.getString("Name");
                 int population = rs.getInt("Population");
@@ -335,31 +336,116 @@ break;
                     System.out.println(country + ": " + population);
                 }
             }
-            //error message
         } catch(SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error!! take a break!: " + e.getMessage());
         }
     }
-
-//All the countries in the world organised by largest population to smallest report #19
     public static void Statement1() throws SQLException {
-        //open database
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
-
-            //implement SQL query
             String Query = "SELECT Name, Population FROM country ORDER BY Population DESC";
             ResultSet rs = stmt.executeQuery(Query);
-            //loop to print all the countries in the world
             while (rs.next()) {
                 String country = rs.getString("Name");
                 int population = rs.getInt("Population");
                 System.out.println(country + ": " + population);
             }
-            //error message
         } catch(SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error!! take a break!: " + e.getMessage());
         }// instead of using an array or switch case within a switch case again i took the lazy route by just adding if statements and a catch at the end.
     }
-}
+    public static void Statement6() throws SQLException {
+        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+            String Query = "SELECT city.Name, city.Population FROM country " +
+                    "JOIN city ON country.Capital = city.ID " +
+                    "ORDER BY city.Population DESC";
+            ResultSet rs = stmt.executeQuery(Query);
+            while (rs.next()) {
+                String city = rs.getString("Name"); // will get the name from the column name
+                int population = rs.getInt("Population");// this will get the population from the column population
+                // Print
+                System.out.println(city + ": " + population);
+            }
+        } catch(SQLException e) {
+            System.out.println("Error!! take a break!: " + e.getMessage());
+        }
+    }
 
+    public static void Statement7() throws SQLException {
+        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter Region: ");
+            String choosenRegion = scanner.nextLine();
+            String Query = "SELECT Name, Population FROM country WHERE Capital = true AND Region = '" + choosenRegion + "' ORDER BY Population DESC"; // select query which will get the name and population from the city table which the capital is in the region which is inputed
+            ResultSet rs = stmt.executeQuery(Query);
+            while (rs.next()) {
+                String city = rs.getString("Name");
+                int population = rs.getInt("Population");
+                // Print
+                System.out.println(city + ": " + population);
+            }
+        } catch(SQLException e) {
+            System.out.println("Error!! take a break!: " + e.getMessage());
+        }
+    }
+    public static void Statement8() throws SQLException {
+        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter the capital city to retrieve: ");
+            int N = scanner.nextInt();
+            String Query = "SELECT Name, Population FROM country WHERE Capital = true ORDER BY Population DESC LIMIT " + N; // select statement
+            ResultSet rs = stmt.executeQuery(Query);
+            while (rs.next()) {
+                String city = rs.getString("Name");
+                int population = rs.getInt("Population");
+                // Print
+                System.out.println(city + ": " + population);
+            }
+        } catch(SQLException e) {
+            System.out.println("Error!! take a break!: " + e.getMessage());
+        }
+    }
+    public static void Statement9() throws SQLException {
+        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter Region: ");
+            String choosenRegion = scanner.nextLine();
+            String Query = "SELECT Name, Population FROM country WHERE Capital = true AND Continent = '" + choosenRegion + "' ORDER BY Population DESC";
+            ResultSet rs = stmt.executeQuery(Query);
+            while (rs.next()) {
+                String city = rs.getString("Name"); // this will get the string name from the column name
+                int population = rs.getInt("Population");// this will get the string population from the column
+                // Print
+                System.out.println(city + ": " + population);
+            }
+        } catch(SQLException e) {
+            System.out.println("Error!! take a break!: " + e.getMessage());
+        }
+    }
+    public static void Statement10() throws SQLException {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter the capital city to retrieve: "); // user input to enter a capital city
+            int N = scanner.nextInt();
+            scanner.nextLine();  // Consume newline
+            System.out.print("Enter the continent: "); // user input allowing user to enter a continent
+            String continent = scanner.nextLine();
+            String Query = "SELECT Name, Population FROM country WHERE Capital = true AND Continent = '" + continent + "' ORDER BY Population DESC LIMIT " + N;
+            ResultSet rs = stmt.executeQuery(Query);
+            while (rs.next()) {
+                String city = rs.getString("Name"); // will get the name from the column name
+                int population = rs.getInt("Population"); // will get the population from the column population
+                // Print
+                System.out.println(city + ": " + population); // this will print the capital city along with the population
+            }
+        } catch (SQLException e) {
+            System.out.println("Error!! take a break!: " + e.getMessage());
+        }
+    }
+
+}

@@ -1,16 +1,13 @@
 package com.napier.sem;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import org.junit.jupiter.api.Test;
-
-import java.sql.*;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-public class Queriestest {
+public class integrationtest {
 
     /** Quick note: docker Desktop app must be running in the back-ground for this to work.
      * A unit test designed to test if the database connects or not.
@@ -58,7 +55,6 @@ public class Queriestest {
                 String tableName = rs.getString("table_name");
 
                 System.out.println(tableName);
-                System.out.println("Connection Successful");
                 assertNotNull(tableName,"Table Name Should Not Be Null");
                 TableCount++;
             }
@@ -70,6 +66,6 @@ public class Queriestest {
         }
 
 
-    }
-}
+    }}
+
 
