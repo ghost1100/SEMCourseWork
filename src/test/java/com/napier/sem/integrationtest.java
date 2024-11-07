@@ -55,7 +55,6 @@ public class integrationtest {
                 String tableName = rs.getString("table_name");
 
                 System.out.println(tableName);
-                System.out.println("Connection Successful");
                 assertNotNull(tableName,"Table Name Should Not Be Null");
                 TableCount++;
             }
