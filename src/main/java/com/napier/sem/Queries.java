@@ -378,8 +378,17 @@ else {
             Scanner scanner = new Scanner(System.in);
             System.out.print("Enter Region: ");
             String choosenRegion = scanner.nextLine();
-            String Query = "SELECT Name, Population FROM country WHERE Capital = true AND Region = '" + choosenRegion + "' ORDER BY Population DESC"; // select query which will get the name and population from the city table which the capital is in the region which is inputed
-            ResultSet rs = stmt.executeQuery(Query);
+
+            // Use a prepared statement to prevent SQL injection
+            String Query = "SELECT city.Name, city.Population FROM country " +
+                    "JOIN city ON country.Capital = city.ID " +
+                    "WHERE country.Region = ? " +
+                    "ORDER BY city.Population DESC";
+
+            PreparedStatement pstmt = con.prepareStatement(Query);
+            pstmt.setString(1, choosenRegion);
+
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 String city = rs.getString("Name");
                 int population = rs.getInt("Population");
@@ -390,6 +399,7 @@ else {
             System.out.println("Error!! take a break!: " + e.getMessage());
         }
     }
+
     public static void Statement8() throws SQLException {
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
