@@ -274,7 +274,7 @@ else {
                     break;
                 }
             }
-            //error
+            //error message
         } catch(SQLException e) {
             System.out.println("Error!! take a break!: " + e.getMessage());
         }
