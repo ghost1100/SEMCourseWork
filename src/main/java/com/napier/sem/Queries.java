@@ -69,7 +69,7 @@ public class Queries {
                         CreateQueries();
                         break;
                     case 4:
-                        // Rachel, please edit the "" Statements later to display what the number of the issue is along side what it does.
+                        // Rachel, please edit the "" Statements later to display what the number of the issue is alongside what it does.
                         // like this: the N of City in the Country Where user provides \N, Issue #15
 System.out.println("please choose which query you'd like to run");
 System.out.println("1.SELECT Name, Population FROM country ORDER BY Population DESC");
@@ -103,27 +103,35 @@ else {
     choice();
 }
 break;
-                    case 5:
+                    case 5: ///I choose the easiest way to include all the code by just having if statements inside the switch case so its static instead of dynamic
+                        // Robbie, please edit the "" Statements later to display what the number of the issue is alongside what it does.
+                        // like this: the N of City in the Country Where user provides \N, Issue #15
 System.out.println("please choose which query you'd like to run");
-int Num2 = sc.nextInt();
+                        System.out.println("SELECT Name, Population FROM city WHERE IsCapital = true ORDER BY Population DESC");
+                        System.out.println("SELECT Name, Population FROM city WHERE IsCapital = true AND Region = '\" + choosenRegion + \"' ORDER BY Population DESC\"");
+                        System.out.println("SELECT Name, Population FROM city WHERE IsCapital = true ORDER BY Population DESC LIMIT \" + N;");
+                        System.out.println("SELECT Name, Population FROM city WHERE IsCapital = true AND Continent = '\" + choosenRegion + \"' ORDER BY Population DESC");
+                        System.out.println("SELECT Name, Population FROM city WHERE IsCapital = true AND Continent = '\" + continent + \"' ORDER BY Population DESC LIMIT \" + N");
+
+                        int Num2 = sc.nextInt();
 if (Num2 == 5) {
-    Statement5();
+    Statement10();
     choice();
 }
 if (Num2 == 4) {
-    Statement4();
+    Statement9();
     choice();
 }
 if (Num2 == 3) {
-    Statement3();
+    Statement8();
     choice();
 }
 if (Num2 == 2) {
-    Statement2();
+    Statement7();
     choice();
 }
 if (Num2 == 1) {
-    Statement1();
+    Statement6();
     choice();
 }
 else {
@@ -346,4 +354,95 @@ else {
             System.out.println("Error!! take a break!: " + e.getMessage());
         }// instead of using an array or switch case within a switch case again i took the lazy route by just adding if statements and a catch at the end.
     }
+    public static void Statement6() throws SQLException {
+        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+            String Query = "SELECT Name, Population FROM city WHERE IsCapital = true ORDER BY Population DESC"; // select query which will get the name and city which is a capital and will order it by the population
+            ResultSet rs = stmt.executeQuery(Query);
+            while (rs.next()) {
+                String city = rs.getString("Name"); // will get the name from the column name
+                int population = rs.getInt("Population");// this will get the population from the column population
+                // Print
+                System.out.println(city + ": " + population);
+            }
+        } catch(SQLException e) {
+            System.out.println("Error!! take a break!: " + e.getMessage());
+        }
+    }
+    public static void Statement7() throws SQLException {
+        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter Region: ");
+            String choosenRegion = scanner.nextLine();
+            String Query = "SELECT Name, Population FROM city WHERE IsCapital = true AND Region = '" + choosenRegion + "' ORDER BY Population DESC"; // select query which will get the name and population from the city table which the capital is in the region which is inputed
+            ResultSet rs = stmt.executeQuery(Query);
+            while (rs.next()) {
+                String city = rs.getString("Name");
+                int population = rs.getInt("Population");
+                // Print
+                System.out.println(city + ": " + population);
+            }
+        } catch(SQLException e) {
+            System.out.println("Error!! take a break!: " + e.getMessage());
+        }
+    }
+    public static void Statement8() throws SQLException {
+        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter the capital city to retrieve: ");
+            int N = scanner.nextInt();
+            String Query = "SELECT Name, Population FROM city WHERE IsCapital = true ORDER BY Population DESC LIMIT " + N; // select statement
+            ResultSet rs = stmt.executeQuery(Query);
+            while (rs.next()) {
+                String city = rs.getString("Name");
+                int population = rs.getInt("Population");
+                // Print
+                System.out.println(city + ": " + population);
+            }
+        } catch(SQLException e) {
+            System.out.println("Error!! take a break!: " + e.getMessage());
+        }
+    }
+    public static void Statement9() throws SQLException {
+        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter Region: ");
+            String choosenRegion = scanner.nextLine();
+            String Query = "SELECT Name, Population FROM city WHERE IsCapital = true AND Continent = '" + choosenRegion + "' ORDER BY Population DESC";
+            ResultSet rs = stmt.executeQuery(Query);
+            while (rs.next()) {
+                String city = rs.getString("Name"); // this will get the string name from the column name
+                int population = rs.getInt("Population");// this will get the string population from the column
+                // Print
+                System.out.println(city + ": " + population);
+            }
+        } catch(SQLException e) {
+            System.out.println("Error!! take a break!: " + e.getMessage());
+        }
+    }
+    public static void Statement10() throws SQLException {
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter the capital city to retrieve: "); // user input to enter a capital city
+            int N = scanner.nextInt();
+            scanner.nextLine();  // Consume newline
+            System.out.print("Enter the continent: "); // user input allowing user to enter a continent
+            String continent = scanner.nextLine();
+            String Query = "SELECT Name, Population FROM city WHERE IsCapital = true AND Continent = '" + continent + "' ORDER BY Population DESC LIMIT " + N;
+            ResultSet rs = stmt.executeQuery(Query);
+            while (rs.next()) {
+                String city = rs.getString("Name"); // will get the name from the column name
+                int population = rs.getInt("Population"); // will get the population from the column population
+                // Print
+                System.out.println(city + ": " + population); // this will print the capital city along with the population
+            }
+        } catch (SQLException e) {
+            System.out.println("Error!! take a break!: " + e.getMessage());
+        }
+    }
+
 }
