@@ -13,7 +13,7 @@
         <property name="hibernate.connection.password">Pass1212</property>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 
-        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.show_sql">true</property>
 
 
         <property name="hibernate.c3p0.min_size">5</property>

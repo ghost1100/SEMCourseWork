@@ -22,6 +22,19 @@ import static org.junit.jupiter.api.Assertions.*;
 public class unittest {
 
 
+
+@Test
+public void testSession() {
+
+    try {
+        SessionFactory factory = new Configuration().configure().buildSessionFactory();
+    } catch (Throwable ex) {
+        System.err.println("Failed to create sessionFactory object." + ex);
+        throw new ExceptionInInitializerError(ex);
+    }
+}
+
+
     /**  //Test Case to ensure that it returns what the user expects.
     @Test// tests the query return if the query doesn't exist returns an error instead.
     public void testQueryValidChoices() {
