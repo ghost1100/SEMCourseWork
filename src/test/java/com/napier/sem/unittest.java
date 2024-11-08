@@ -12,7 +12,6 @@ import java.io.ByteArrayInputStream;
 import java.util.Scanner;
 ///Error Handling Imports.
 import java.util.InputMismatchException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -33,7 +32,7 @@ public class unittest {
     }*/
 
 
-
+//made the session factory and transaction into global variables. with access modifiers.
     private SessionFactory sessionFactory;
     private Session session;
     Transaction tx = null;
