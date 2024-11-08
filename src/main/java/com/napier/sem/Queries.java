@@ -71,13 +71,12 @@ public class Queries {
                     case 4:
                         // Rachel, please edit the "" Statements later to display what the number of the issue is alongside what it does.
                         // like this: the N of City in the Country Where user provides \N, Issue #15
-                        System.out.println("please choose which query you'd like to run");
-                        System.out.println("1. All the countries in the world organised by largest population to smallest report #19");
-                        System.out.println("2. All the countries in a continent organised by largest population to smallest report #20");
-                        System.out.println("3.All the countries in a region organised by largest population to smallest report #21");
-                        System.out.println("4.The top N populated countries in a continent where N is provided by the user #23");
-                        System.out.println("5.The top N populated countries in the world where N is provided by the user #22 ");
-
+System.out.println("please choose which query you'd like to run");
+System.out.println("1.SELECT Name, Population FROM country ORDER BY Population DESC");
+System.out.println("2.SELECT Name, Population, Continent FROM country ORDER BY Population DESC");
+System.out.println("3.SELECT Name, Population, Region FROM country ORDER BY Population DESC");
+System.out.println("4.SELECT Name, Population, Continent FROM country ORDER BY Population DESC");
+System.out.println("5.SELECT Name, Population FROM country ORDER BY Population DESC ");
 int Num = sc.nextInt();
 if (Num == 5) {
     Statement5();
@@ -248,149 +247,109 @@ else {
             throw new RuntimeException(e);
         }
     }
-
-    //The top N populated countries in the world where N is provided by the user #22
     public static void Statement5() throws SQLException {
-        //open database
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
-            //get N from user
             System.out.print("Enter N: ");
             int n = Integer.parseInt(scanner.nextLine());
-            //implement SQL query
             String Query = "SELECT Name, Population FROM country ORDER BY Population DESC";
             ResultSet rs = stmt.executeQuery(Query);
-            //initialise count
             int count = 0;
-            //loop top N populated countries
             while (rs.next()) {
                 String country = rs.getString("Name");
                 int population = rs.getInt("Population");
                 System.out.println(country + ": " + population);
                 count++;
-                //if count is greater than n then the loop ends
                 if (count >= n) {
                     break;
                 }
             }
-            //error message
+            scanner.close();
         } catch(SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error!! take a break!: " + e.getMessage());
         }
     }
-
-    //The top N populated countries in a continent where N is provided by the user #23
     public static void Statement4() throws SQLException {
-        //open databse
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
-            //get the contient from the user
             System.out.print("Enter Continent: ");
             String choosenContinent = scanner.nextLine();
-            //get n from the user
             System.out.print("Enter N: ");
             int n = Integer.parseInt(scanner.nextLine());
-            //implement SQL query
             String Query = "SELECT Name, Population, Continent FROM country ORDER BY Population DESC";
             ResultSet rs = stmt.executeQuery(Query);
-            //initalise count
             int count = 0;
-            //loop top N populated countries in a continent
             while (rs.next()) {
                 String country = rs.getString("Name");
                 int population = rs.getInt("Population");
                 String continent = rs.getString("Continent");
-                //if the contient is the contient choosen from the user then display info
                 if (continent.equals(choosenContinent)) {
                     System.out.println(country + ": " + population);
                     count++;
                 }
-                //if count is greater than n then the loop ends
                 if (count >= n) {
                     break;
                 }
             }
-            //error message
+            scanner.close();
         } catch(SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error!! take a break!: " + e.getMessage());
         }
     }
-
-    //All the countries in a region organised by largest population to smallest report #21
     public static void Statement3() throws SQLException {
-        //connect to database
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
-            //get region from user
             System.out.print("Enter Region: ");
             String choosenRegion = scanner.nextLine();
-            //implement SQL query
             String Query = "SELECT Name, Population, Region FROM country ORDER BY Population DESC";
             ResultSet rs = stmt.executeQuery(Query);
-            // loop all the countries in a region
             while (rs.next()) {
                 String country = rs.getString("Name");
                 int population = rs.getInt("Population");
-                String region = rs.getString("Region");
-                //if the region is the region choosen then display population
+                String region = rs.getString("Region"); // Get the continent
                 if(region.equals(choosenRegion)) {
+                    // Print
                     System.out.println(country + ": " + population);
                 }
             }
-            //error message
         } catch(SQLException e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error!! take a break!: " + e.getMessage());
         }
     }
-
-    //All the countries in a continent organised by largest population to smallest report #20
     public static void Statement2() throws SQLException {
-        //open database
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
-            //get contient from user
             System.out.print("Enter Continent: ");
             String choosenContient = scanner.nextLine();
-            //implement SQL query
             String Query = "SELECT Name, Population, Continent FROM country ORDER BY Population DESC";
             ResultSet rs = stmt.executeQuery(Query);
-            //loop all the countries in a continent
             while (rs.next()) {
                 String country = rs.getString("Name");
                 int population = rs.getInt("Population");
-                String continent = rs.getString("Continent");
-                //if the contient matches the choosen contient display info
+                String continent = rs.getString("Continent"); // Get the continent
                 if(continent.equals(choosenContient)) {
                     // Print the city name, population, and continent
                     System.out.println(country + ": " + population);
                 }
             }
-            //error message
         } catch(SQLException e) {
             System.out.println("Error!! take a break!: " + e.getMessage());
         }
     }
-
-    //All the countries in the world organised by largest population to smallest report #19
     public static void Statement1() throws SQLException {
-        //open database
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
-
-            //implement SQL query
             String Query = "SELECT Name, Population FROM country ORDER BY Population DESC";
             ResultSet rs = stmt.executeQuery(Query);
-            //loop all the countries in the world
             while (rs.next()) {
                 String country = rs.getString("Name");
                 int population = rs.getInt("Population");
                 System.out.println(country + ": " + population);
             }
-            //error message
         } catch(SQLException e) {
             System.out.println("Error!! take a break!: " + e.getMessage());
         }// instead of using an array or switch case within a switch case again i took the lazy route by just adding if statements and a catch at the end.
@@ -417,11 +376,11 @@ else {
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter Region: "); // enters the region for the user to input
+            System.out.print("Enter Region: ");
             String choosenRegion = scanner.nextLine();
 
 
-            String Query = "SELECT city.Name, city.Population FROM country " + // select statement
+            String Query = "SELECT city.Name, city.Population FROM country " +
                     "JOIN city ON country.Capital = city.ID " +
                     "WHERE country.Region = ? " +
                     "ORDER BY city.Population DESC";
@@ -468,9 +427,7 @@ else {
             Scanner scanner = new Scanner(System.in);
             System.out.print("Enter Region: ");
             String choosenRegion = scanner.nextLine();
-            String Query = String Query = "SELECT city.Name, city.Population FROM country " + choosenRegion +
-                    "JOIN city ON country.Capital = city.ID " +
-                    "ORDER BY city.Population DESC";
+            String Query = "SELECT Name, Population FROM country WHERE Capital = true AND Continent = '" + choosenRegion + "' ORDER BY Population DESC";
             ResultSet rs = stmt.executeQuery(Query);
             while (rs.next()) {
                 String city = rs.getString("Name"); // this will get the string name from the column name
