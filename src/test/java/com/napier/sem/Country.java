@@ -41,22 +41,28 @@ public class Country {
     public Continent getContinent() {
         return continent;
     }
-    public void setContinent(Continent continent) {}
+    public void setContinent(Continent continent) {
+        this.continent = continent;
+    }
 
     public String getName() {
 
         return "";
     }
 
-    public void setPopulation(int i) {
+    public int setPopulation(int i) {
+        return i;
     }
 
     public void setRegion(String kabul) {
+        this.region = kabul;
     }
 
     public void setName(String afghanistan) {
+        this.name = afghanistan;
     }
 
-    public void setCode(String afg) {
+    public void setCode(String AFG) {
+        this.code = AFG;
     }
 }

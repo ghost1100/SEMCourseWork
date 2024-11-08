@@ -69,8 +69,6 @@ public class Queries {
                         CreateQueries();
                         break;
                     case 4:
-                        // Rachel, please edit the "" Statements later to display what the number of the issue is alongside what it does.
-                        // like this: the N of City in the Country Where user provides \N, Issue #15
                         System.out.println("please choose which query you'd like to run");
                         System.out.println("1. All the countries in the world organised by largest population to smallest report #19");
                         System.out.println("2. All the countries in a continent organised by largest population to smallest report #20");
