@@ -45,24 +45,79 @@ public class Country {
         this.continent = continent;
     }
 
+    public String getCode() {
+        return code;
+    }
+    public void setCode(String code) {
+        this.code = code;
+    }
     public String getName() {
-
-        return "";
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public Continent getRegion() {
+        return continent;
+    }
+    public void setRegion(Continent region) {
+        this.continent = region;
     }
 
-    public int setPopulation(int i) {
-        return i;
+        public void setPopulation(int population) {
+        this.population = population;
     }
 
-    public void setRegion(String kabul) {
-        this.region = kabul;
+    public int getPopulation() {
+        return population;
     }
+    public void setSurfaceArea(double surfaceArea) {
+        this.surfaceArea = surfaceArea;
 
-    public void setName(String afghanistan) {
-        this.name = afghanistan;
     }
-
-    public void setCode(String AFG) {
-        this.code = AFG;
+    public double getSurfaceArea() {
+        return surfaceArea;
+    }
+    public void setIndepYear(int indepYear) {
+        this.indepYear = indepYear;
+    }
+    public int getIndepYear() {
+        return indepYear;
+    }
+    public void setGnp(String gnp) {
+        this.gnp = gnp;
+    }
+    public String getGnp() {
+        return gnp;
+    }
+    public void setLocalName(String localName) {
+        this.localName = localName;
+    }
+    public String getLocalName() {
+        return localName;
+    }
+    public void setGovernmentForm(String governmentForm) {
+        this.governmentForm = governmentForm;
+    }
+    public String getGovernmentForm() {
+        return governmentForm;
+    }
+    public void setHeadOfState(String headOfState) {
+        this.headOfState = headOfState;
+    }
+    public String getHeadOfState() {
+        return headOfState;
+    }
+    public void setCapital(String capital) {
+        this.capital = capital;
+    }
+    public String getCapital() {
+        return capital;
+    }
+    public void setCode2(String code2) {
+        this.code2 = code2;
+    }
+    public String getCode2() {
+        return code2;
     }
 }

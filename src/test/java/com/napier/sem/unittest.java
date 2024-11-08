@@ -25,7 +25,6 @@ public class unittest {
 
 @Test
 public void testSession() {
-
     try {
         SessionFactory factory = new Configuration().configure().buildSessionFactory();
     } catch (Throwable ex) {
@@ -95,8 +94,8 @@ public void testSession() {
          country.setCode("AFG");
          country.setName("Afghanistan");
          country.setContinent(Continent.Asia);
-         country.setRegion("Kabul");
-         country.setPopulation(17800000);
+         country.setRegion(Continent.valueOf("Kabul"));
+         country.setPopulation(1780000);
          session.persist(country);
          session.getTransaction().commit();
          Country savedCountry = session.get(Country.class,"AFG");
