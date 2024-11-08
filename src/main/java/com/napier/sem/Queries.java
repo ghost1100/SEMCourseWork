@@ -276,79 +276,100 @@ else {
             }
             //error message
         } catch(SQLException e) {
-            System.out.println("Error!! take a break!: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
     //The top N populated countries in a continent where N is provided by the user #23
     public static void Statement4() throws SQLException {
+        //open databse
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
+            //get the contient from the user
             System.out.print("Enter Continent: ");
             String choosenContinent = scanner.nextLine();
+            //get n from the user
             System.out.print("Enter N: ");
             int n = Integer.parseInt(scanner.nextLine());
+            //implement SQL query
             String Query = "SELECT Name, Population, Continent FROM country ORDER BY Population DESC";
             ResultSet rs = stmt.executeQuery(Query);
+            //initalise count
             int count = 0;
+            //loop top N populated countries in a continent
             while (rs.next()) {
                 String country = rs.getString("Name");
                 int population = rs.getInt("Population");
                 String continent = rs.getString("Continent");
+                //if the contient is the contient choosen from the user then display info
                 if (continent.equals(choosenContinent)) {
                     System.out.println(country + ": " + population);
                     count++;
                 }
+                //if count is greater than n then the loop ends
                 if (count >= n) {
                     break;
                 }
             }
+            //error message
         } catch(SQLException e) {
-            System.out.println("Error!! take a break!: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
     //All the countries in a region organised by largest population to smallest report #21
     public static void Statement3() throws SQLException {
+        //connect to database
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
+            //get region from user
             System.out.print("Enter Region: ");
             String choosenRegion = scanner.nextLine();
+            //implement SQL query
             String Query = "SELECT Name, Population, Region FROM country ORDER BY Population DESC";
             ResultSet rs = stmt.executeQuery(Query);
+            // loop all the countries in a region
             while (rs.next()) {
                 String country = rs.getString("Name");
                 int population = rs.getInt("Population");
-                String region = rs.getString("Region"); // Get the continent
+                String region = rs.getString("Region");
+                //if the region is the region choosen then display population
                 if(region.equals(choosenRegion)) {
                     System.out.println(country + ": " + population);
                 }
             }
+            //error message
         } catch(SQLException e) {
-            System.out.println("Error!! take a break!: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
     //All the countries in a continent organised by largest population to smallest report #20
     public static void Statement2() throws SQLException {
+        //open database
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
+            //get contient from user
             System.out.print("Enter Continent: ");
             String choosenContient = scanner.nextLine();
+            //implement SQL query
             String Query = "SELECT Name, Population, Continent FROM country ORDER BY Population DESC";
             ResultSet rs = stmt.executeQuery(Query);
+            //loop all the countries in a continent
             while (rs.next()) {
                 String country = rs.getString("Name");
                 int population = rs.getInt("Population");
-                String continent = rs.getString("Continent"); // Get the continent
+                String continent = rs.getString("Continent");
+                //if the contient matches the choosen contient display info
                 if(continent.equals(choosenContient)) {
                     // Print the city name, population, and continent
                     System.out.println(country + ": " + population);
                 }
             }
+            //error message
         } catch(SQLException e) {
             System.out.println("Error!! take a break!: " + e.getMessage());
         }
@@ -356,15 +377,20 @@ else {
 
     //All the countries in the world organised by largest population to smallest report #19
     public static void Statement1() throws SQLException {
+        //open database
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
+
+            //implement SQL query
             String Query = "SELECT Name, Population FROM country ORDER BY Population DESC";
             ResultSet rs = stmt.executeQuery(Query);
+            //loop all the countries in the world
             while (rs.next()) {
                 String country = rs.getString("Name");
                 int population = rs.getInt("Population");
                 System.out.println(country + ": " + population);
             }
+            //error message
         } catch(SQLException e) {
             System.out.println("Error!! take a break!: " + e.getMessage());
         }// instead of using an array or switch case within a switch case again i took the lazy route by just adding if statements and a catch at the end.
