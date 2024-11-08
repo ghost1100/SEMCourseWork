@@ -72,7 +72,7 @@ public class unittest {
         country.setCode("AFG");
         country.setName("Afghanistan");
         country.setContinent(Continent.Asia);
-        country.setRegion("Kabol");
+        country.setRegion("Kabul");
         country.setPopulation(17800000);
         session.persist(country);
         session.getTransaction().commit();
