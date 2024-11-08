@@ -1,10 +1,10 @@
-CREATE SCHEMA IF NOT EXISTS World;
+CREATE SCHEMA IF NOT EXISTS World_test;
 --Creates a schema/database name world if it doesn't exist.
 SET Database Sql SYNTAX MYS TRUE;
     --Configures the database to use sql syntax compatible with mysql.
     SET MODE MYSQL;
         --sets the database mode to behave like mys which effects compatibility, features and behavior.
-        USE World;
+        USE World_test;
             --Specifying the Database which I'd like to use
 CREATE TABLE city(
 `Code` char(3) NOT NULL DEFAULT '',
@@ -53,3 +53,5 @@ CREATE TABLE countryLanguage(
            KEY `CountryCode` (`CountryCode`),
            CONSTRAINT `countryLanguage_ibfk_1` FOREIGN KEY (`CountryCode`) REFERENCES `country` (`Code`)
 );
+
+INSERT INTO `city` VALUES (1,'Kabul','AFG','Kabol',1780000);
