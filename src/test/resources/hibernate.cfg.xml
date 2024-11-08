@@ -13,11 +13,6 @@
         <property name="hibernate.connection.password">Pass1212</property>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
 
-        <mapping class="com.napier.sem.City"/>
-        <mapping class="com.napier.sem.Country"/>
-        <mapping class="com.napier.sem.CountryLanguage"/>
-        <mapping class="com.napier.sem.Continent"/>
-
         <property name="hibernate.show_sql">false</property>
 
 
@@ -26,6 +21,13 @@
         <property name="hibernate.c3p0.timeout">300</property>
         <property name="hibernate.c3p0.max_statements">50</property>
         <property name="hibernate.c3p0.idle_test_period">3000</property>
+
+        <mapping class="com.napier.sem.City"/>
+        <mapping class="com.napier.sem.Country"/>
+        <mapping class="com.napier.sem.CountryLanguage"/>
+        <mapping class="com.napier.sem.Continent"/>
+
+  <!--Hibernate DTD Structure this is what's caused the previous errors, property > Mapping > Class cache collection-cache, > events , Listener... -->
     </session-factory>
 
 </hibernate-configuration>
