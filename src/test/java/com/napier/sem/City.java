@@ -28,7 +28,9 @@ public class City {
     public static int setPopulation(int i) {
         return i;
     }
-
+    public int getPopulation() {
+        return population;
+    }
     //getters and setters will be placed below
     public String getName() {
 // set to return the name of the city later on inside the testing class.
@@ -36,6 +38,20 @@ public class City {
     }
 
 
+    public String setCountryCode() {
+        this.countryCode = "";
+        return countryCode;
+    }
 
+    public String getCountryCode() {
+        return countryCode;
+    }
 
+    public String setDistrict() {
+        this.district = "";
+        return district ;
+    }
+    public String getDistrict() {
+        return district;
+    }
 }

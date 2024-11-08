@@ -57,11 +57,10 @@ public class unittest {
         // creates an instance of the table and sets its information based on what's in the other classes just so that it follows their structure.
        try {
            City city = new City();
-           city.setCode("KAB");
            city.setName("Kabul");
-           city.setContinent(Continent.Asia);
-           city.setRegion("Kabul");
            city.setPopulation(17800000);
+           city.setDistrict();
+           city.setCountryCode();
            //saves the created city entity
            session.persist(city);
            session.getTransaction();

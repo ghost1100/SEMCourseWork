@@ -47,4 +47,4 @@ CREATE TABLE countryLanguage(
            CONSTRAINT `countryLanguage_ibfk_1` FOREIGN KEY (`CountryCode`) REFERENCES `country` (`Code`)
 );
 
-INSERT INTO `city` VALUES (1,'Kabul','AFG','Kabol',1780000);
+INSERT INTO `city` VALUES (1,'Kabul','AFG','Kabul',17800000);
