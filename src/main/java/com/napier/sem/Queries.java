@@ -359,7 +359,7 @@ else {
             Statement stmt = con.createStatement();
             String Query = "SELECT city.Name, city.Population FROM country " +
                     "JOIN city ON country.Capital = city.ID " +
-                    "ORDER BY city.Population DESC";
+                    "ORDER BY city.Population DESC"; // this joins the tables city and country so the query can be exicuted
             ResultSet rs = stmt.executeQuery(Query);
             while (rs.next()) {
                 String city = rs.getString("Name"); // will get the name from the column name
@@ -376,11 +376,11 @@ else {
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter Region: ");
+            System.out.print("Enter Region: "); // enters the region for the user to input
             String choosenRegion = scanner.nextLine();
 
-            // Use a prepared statement to prevent SQL injection
-            String Query = "SELECT city.Name, city.Population FROM country " +
+
+            String Query = "SELECT city.Name, city.Population FROM country " + // select statement
                     "JOIN city ON country.Capital = city.ID " +
                     "WHERE country.Region = ? " +
                     "ORDER BY city.Population DESC";
@@ -406,7 +406,10 @@ else {
             Scanner scanner = new Scanner(System.in);
             System.out.print("Enter the capital city to retrieve: ");
             int N = scanner.nextInt();
-            String Query = "SELECT Name, Population FROM country WHERE Capital = true ORDER BY Population DESC LIMIT " + N; // select statement
+            String Query = "SELECT city.Name, city.Population FROM country " +
+                    "JOIN city ON country.Capital = city.ID " +
+                    "WHERE country.Region = ? " +
+                    "ORDER BY city.Population DESC LIMIT "+N;
             ResultSet rs = stmt.executeQuery(Query);
             while (rs.next()) {
                 String city = rs.getString("Name");
@@ -424,7 +427,9 @@ else {
             Scanner scanner = new Scanner(System.in);
             System.out.print("Enter Region: ");
             String choosenRegion = scanner.nextLine();
-            String Query = "SELECT Name, Population FROM country WHERE Capital = true AND Continent = '" + choosenRegion + "' ORDER BY Population DESC";
+            String Query = String Query = "SELECT city.Name, city.Population FROM country " + choosenRegion +
+                    "JOIN city ON country.Capital = city.ID " +
+                    "ORDER BY city.Population DESC";
             ResultSet rs = stmt.executeQuery(Query);
             while (rs.next()) {
                 String city = rs.getString("Name"); // this will get the string name from the column name
