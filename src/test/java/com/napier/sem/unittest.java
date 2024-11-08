@@ -59,8 +59,8 @@ public class unittest {
            City city = new City();
            city.setName("Kabul");
            city.setPopulation(17800000);
-           city.setDistrict();
-           city.setCountryCode();
+           city.setDistrict("Kabul");
+           city.setCountryCode("AFG");
            //saves the created city entity
            session.persist(city);
            session.getTransaction();
@@ -68,7 +68,7 @@ public class unittest {
            //Retries the saved city and verifies its existence.
            City savedCity = session.get(City.class,"KAB");
            assertNotNull(savedCity);
-           assertEquals("Kabul",savedCity.getName());
+           assertEquals("Kabul",savedCity.getId());
        } catch (Exception e) {
            throw new RuntimeException(e);
        }

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE hibernate-configuration PUBLIC
-        "-//Hibernate/Hiberate Configuration DTD 3.0//EN"
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://hibernate.sorceforge.net/hibernate-configuration-3.0.dtd">
 
 

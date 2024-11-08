@@ -6,52 +6,51 @@ import jakarta.persistence.*;
 @Table(name = "city")
 public class City {
     @Id
-    @Column(name = "Name")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+    private int id;
+    @Column(name = "Name", nullable = false, length = 50)
     private String name;
-    @Column(name = "CountryCode")
+    @Column(name = "CountryCode", nullable = false, length = 3)
     private String countryCode;
-    @Column(name = "District")
+    @Column(name = "District",nullable = false, length = 50)
     private String district;
-    @Column(name = "Population")
+    @Column(name = "Population", nullable = false)
     private int population;
 
-
-
-    public static String setName(String kabul) {
-        return"";
-    }
-  public String getName(String kabul) {
-        this.name= "";
-      return kabul;
+    //getters and setters will be placed below
+  public City(){
+      super();
+  }
+  public int getId() {
+      return id;
+  }
+  public void setId(int id) {
+      this.id = id;
+  }
+  public String getName() {
+      return name;
+  }
+  public void setName(String name) {
+      this.name = name;
+  }
+  public String getCountryCode() {
+      return countryCode;
+  }
+  public void setCountryCode(String countryCode) {
+      this.countryCode = countryCode;
+  }
+  public String getDistrict() {
+      return district;
+  }
+  public void setDistrict(String district) {
+      this.district = district;
+  }
+  public int getPopulation() {
+      return population;
+  }
+  public void setPopulation(int population) {
+      this.population = population;
   }
 
-    public static int setPopulation(int i) {
-        return i;
-    }
-    public int getPopulation() {
-        return population;
-    }
-    //getters and setters will be placed below
-    public String getName() {
-// set to return the name of the city later on inside the testing class.
-        return "";
-    }
-
-
-    public String setCountryCode() {
-        this.countryCode = "";
-        return countryCode;
-    }
-
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    public String setDistrict() {
-        this.district = "";
-        return district ;
-    }
-    public String getDistrict() {
-        return district;
-    }
 }
