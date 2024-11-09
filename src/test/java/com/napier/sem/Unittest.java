@@ -8,10 +8,7 @@ import org.junit.jupiter.api.Test;
 ///Hibernate Imports.
 import org.hibernate.cfg.Configuration;
 ///Input output imports, plan to use them for further unit tests if time allows it.
-import java.io.ByteArrayInputStream;
-import java.util.Scanner;
 ///Error Handling Imports.
-import java.util.InputMismatchException;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -19,49 +16,15 @@ import static org.junit.jupiter.api.Assertions.*;
  * class holding the unit tests.
  * I will test the input, output , error handling and I will use an in memory database for additional testing
  */
-public class unittest {
-
-@Test
-void testGettersAndSetters() {
-    City city = new City();
-    city.setId(1);
-    assertEquals(city.getId(),1);
-    city.setName("FakeCity");
-    assertEquals(city.getName(),"FakeCity");
-    city.setCountryCode("FCT");
-    assertEquals(city.getCountryCode(),"FCT");
-    city.setDistrict("FakeDistrict");
-    assertEquals(city.getDistrict(),"FakeDistrict");
-    city.setPopulation(100);
-    assertEquals(city.getPopulation(),100);
-    //test would fail if the items returned don't match what is expected.
-}
-
-@Test
-public void testSession() {
-    try {
-        SessionFactory factory = new Configuration().configure().buildSessionFactory();
-    } catch (Throwable ex) {
-        System.err.println("Failed to create sessionFactory object." + ex);
-        throw new ExceptionInInitializerError(ex);
-    }
-}
+public class Unittest {
+private SessionFactory sessionFactory;
+private Session session;
+private Transaction tx;
 
 
-    /**  //Test Case to ensure that it returns what the user expects.
-    @Test// tests the query return if the query doesn't exist returns an error instead.
-    public void testQueryValidChoices() {
-
-        int QueryIndex = 2;
-        String expectedQuery = Queries.PREDEFINED_QUERIES[QueryIndex];
-        assertEquals(expectedQuery, Queries.PREDEFINED_QUERIES[QueryIndex], "Should return the right predefined query");
-    }*/
 
 
 //made the session factory and transaction into global variables. with access modifiers.
-    private SessionFactory sessionFactory;
-    private Session session;
-    Transaction tx = null;
     @BeforeEach
     public void setUp() {
         try {
@@ -79,6 +42,39 @@ public void testSession() {
 
     }
     @Test
+    void testGettersAndSetters() {
+        City city = new City();
+        city.setId(1);
+        assertEquals(city.getId(),1);
+        city.setName("FakeCity");
+        assertEquals(city.getName(),"FakeCity");
+        city.setCountryCode("FCT");
+        assertEquals(city.getCountryCode(),"FCT");
+        city.setDistrict("FakeDistrict");
+        assertEquals(city.getDistrict(),"FakeDistrict");
+        city.setPopulation(100);
+        assertEquals(city.getPopulation(),100);
+        //test would fail if the items returned don't match what is expected.
+    }
+
+    @Test
+    public void testSession() {
+        try {
+            SessionFactory factory = new Configuration().configure().buildSessionFactory();
+        } catch (Throwable ex) {
+            System.err.println("Failed to create sessionFactory object." + ex);
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
+    //Test Case to ensure that it returns what the user expects.
+     @Test// tests the query return if the query doesn't exist returns an error instead.
+     public void testQueryValidChoices() {
+
+     int QueryIndex = 2;
+     String expectedQuery = Queries.PREDEFINED_QUERIES[QueryIndex];
+     assertEquals(expectedQuery, Queries.PREDEFINED_QUERIES[QueryIndex], "Should return the right predefined query");
+     }
+    @Test
     public void testSaveCity() {
         // creates an instance of the table and sets its information based on what's in the other classes just so that it follows their structure.
        try {
@@ -89,13 +85,15 @@ public void testSession() {
            city.setCountryCode("AFG");
            //saves the created city entity
            session.persist(city);
-           session.getTransaction();
            tx.commit();
            //Retries the saved city and verifies its existence.
-           City savedCity = session.get(City.class,"KAB");
+           City savedCity = session.get(City.class,city.getId());
            assertNotNull(savedCity);
-           assertEquals("Kabul",savedCity.getId());
+           assertEquals("Kabul",savedCity.getName());
        } catch (Exception e) {
+           if (tx != null) {
+               tx.rollback();
+           }
            throw new RuntimeException(e);
        }
 
@@ -110,8 +108,10 @@ public void testSession() {
          country.setContinent(Continent.Asia);
          country.setRegion(Continent.valueOf("Kabul"));
          country.setPopulation(1780000);
+         //saves the created country entity
          session.persist(country);
-         session.getTransaction().commit();
+         tx.commit();
+         //Retries the saved country and verifies its existence.
          Country savedCountry = session.get(Country.class,"AFG");
          assertNotNull(savedCountry);
          assertEquals("Afghanistan", savedCountry.getName());
