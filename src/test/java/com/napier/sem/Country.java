@@ -60,8 +60,8 @@ public class Country {
     public Continent getRegion() {
         return continent;
     }
-    public void setRegion(Continent region) {
-        this.continent = region;
+    public void setRegion(String asia) {
+        this.continent = Continent.valueOf(region);
     }
 
         public void setPopulation(int population) {

@@ -69,7 +69,6 @@ private Transaction tx;
     //Test Case to ensure that it returns what the user expects.
      @Test// tests the query return if the query doesn't exist returns an error instead.
      public void testQueryValidChoices() {
-
      int QueryIndex = 2;
      String expectedQuery = Queries.PREDEFINED_QUERIES[QueryIndex];
      assertEquals(expectedQuery, Queries.PREDEFINED_QUERIES[QueryIndex], "Should return the right predefined query");
@@ -91,7 +90,7 @@ private Transaction tx;
            assertNotNull(savedCity);
            assertEquals("Kabul",savedCity.getName());
        } catch (Exception e) {
-           if (tx != null) {
+           if (tx != null && tx.isActive()){
                tx.rollback();
            }
            throw new RuntimeException(e);
@@ -106,7 +105,7 @@ private Transaction tx;
          country.setCode("AFG");
          country.setName("Afghanistan");
          country.setContinent(Continent.Asia);
-         country.setRegion(Continent.valueOf("Kabul"));
+         country.setRegion("Asia");
          country.setPopulation(1780000);
          //saves the created country entity
          session.persist(country);
@@ -116,6 +115,9 @@ private Transaction tx;
          assertNotNull(savedCountry);
          assertEquals("Afghanistan", savedCountry.getName());
      } catch (Exception e) {
+         if (tx != null && tx.isActive()){
+             tx.rollback();
+         }
          throw new RuntimeException(e);
      }
 
@@ -126,8 +128,10 @@ private Transaction tx;
     public void tearDown() {
         //clears out all data after attaining the expected results.
      try {
+         if(tx != null && tx.isActive()){
+             tx.rollback();
+         }
          if (session != null) {
-             session.flush();
              session.close();
          }
          if (sessionFactory != null) {
