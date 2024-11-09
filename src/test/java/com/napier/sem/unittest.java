@@ -21,7 +21,21 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class unittest {
 
-
+@Test
+void testGettersAndSetters() {
+    City city = new City();
+    city.setId(1);
+    assertEquals(city.getId(),1);
+    city.setName("FakeCity");
+    assertEquals(city.getName(),"FakeCity");
+    city.setCountryCode("FCT");
+    assertEquals(city.getCountryCode(),"FCT");
+    city.setDistrict("FakeDistrict");
+    assertEquals(city.getDistrict(),"FakeDistrict");
+    city.setPopulation(100);
+    assertEquals(city.getPopulation(),100);
+    //test would fail if the items returned don't match what is expected.
+}
 
 @Test
 public void testSession() {
