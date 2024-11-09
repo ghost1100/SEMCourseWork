@@ -36,88 +36,86 @@ public class Country {
     @Column(name = "Code2")
     private String code2;
     //getters and setters will be placed below
-
-
-    public Continent getContinent() {
-        return continent;
-    }
-    public void setContinent(Continent continent) {
-        this.continent = continent;
-    }
+public Country() {
+    super();
+}
+public Continent getContinent() {
+    return continent;
+}
+public void setContinent(Continent continent) {
+    this.continent = continent;
+}
 
     public String getCode() {
         return code;
     }
     public void setCode(String code) {
-        this.code = code;
+    this.code = code;
     }
     public String getName() {
-        return name;
+    return name;
     }
     public void setName(String name) {
-        this.name = name;
+    this.name = name;
     }
-    public Continent getRegion() {
-        return continent;
+    public String getRegion() {
+    return region;
     }
-    public void setRegion(String asia) {
-        this.continent = Continent.valueOf(region);
+    public void setRegion(String region) {
+    this.region = region;
     }
-
-        public void setPopulation(int population) {
-        this.population = population;
+    public void setPopulation(int population) {
+    this.population = population;
     }
-
     public int getPopulation() {
-        return population;
+    return population;
     }
     public void setSurfaceArea(double surfaceArea) {
-        this.surfaceArea = surfaceArea;
-
+    this.surfaceArea = surfaceArea;
     }
     public double getSurfaceArea() {
-        return surfaceArea;
+    return surfaceArea;
     }
     public void setIndepYear(int indepYear) {
-        this.indepYear = indepYear;
+    this.indepYear = indepYear;
     }
     public int getIndepYear() {
-        return indepYear;
+    return indepYear;
     }
     public void setGnp(String gnp) {
-        this.gnp = gnp;
+    this.gnp = gnp;
     }
     public String getGnp() {
-        return gnp;
+    return gnp;
     }
     public void setLocalName(String localName) {
-        this.localName = localName;
+    this.localName = localName;
     }
     public String getLocalName() {
-        return localName;
+    return localName;
     }
     public void setGovernmentForm(String governmentForm) {
-        this.governmentForm = governmentForm;
+    this.governmentForm = governmentForm;
     }
     public String getGovernmentForm() {
-        return governmentForm;
+    return governmentForm;
     }
     public void setHeadOfState(String headOfState) {
-        this.headOfState = headOfState;
+    this.headOfState = headOfState;
     }
     public String getHeadOfState() {
-        return headOfState;
+    return headOfState;
     }
     public void setCapital(String capital) {
-        this.capital = capital;
+    this.capital = capital;
     }
     public String getCapital() {
-        return capital;
+    return capital;
     }
     public void setCode2(String code2) {
-        this.code2 = code2;
+    this.code2 = code2;
     }
     public String getCode2() {
-        return code2;
+    return code2;
     }
 }

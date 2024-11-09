@@ -1,7 +1,9 @@
 ///Package Imports.
 package com.napier.sem;
 ///API Tester Imports.
+import com.mysql.cj.protocol.x.Notice;
 import org.hibernate.*;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -107,6 +109,14 @@ private Transaction tx;
          country.setContinent(Continent.Asia);
          country.setRegion("Asia");
          country.setPopulation(1780000);
+         country.setCapital("Washington");
+         country.setGnp(String.valueOf(15.62));
+         country.setGovernmentForm("Islamic Emirate of Afghanistan");
+         country.setHeadOfState("King Mohammad Zahir Shah");
+         country.setGovernmentForm("Dictatorship");
+         country.setIndepYear(1919);
+         country.setLocalName("Afghanistan");
+         country.setSurfaceArea(652860);
          //saves the created country entity
          session.persist(country);
          tx.commit();
@@ -120,9 +130,9 @@ private Transaction tx;
          }
          throw new RuntimeException(e);
      }
-
-
     }
+
+
 
     @AfterEach
     public void tearDown() {
@@ -140,9 +150,9 @@ private Transaction tx;
      } catch (Exception e) {
          throw new RuntimeException(e);
      }
-
     }
-}
+    }
+
 
 
 
