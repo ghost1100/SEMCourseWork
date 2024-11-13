@@ -43,6 +43,7 @@ catch(SQLException e) {
     // reminder not using a finally block since try resources is in use.
 }}
 
+}
 //Start of Erin's work (Its an attempt, we don't need to talk about why its not worki8ntg just yet, note that the //* are the acc lines of code)
         //The top N populated cities in a region where N is provided by the user
         //*public static void Statement16() throws SQLException {
@@ -173,4 +174,3 @@ catch(SQLException e) {
         //*}
     //*} //End of populated cities in continent 
  
-}
