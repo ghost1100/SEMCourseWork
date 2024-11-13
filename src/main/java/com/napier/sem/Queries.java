@@ -43,5 +43,134 @@ catch(SQLException e) {
     // reminder not using a finally block since try resources is in use.
 }}
 
+//Start of Erin's work (Its an attempt, we don't need to talk about why its not worki8ntg just yet, note that the //* are the acc lines of code)
+        //The top N populated cities in a region where N is provided by the user
+        //*public static void Statement16() throws SQLException {
+        //connect to database
+        //*try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            //*Statement stmt = con.createStatement();
+            //*Scanner scanner = new Scanner(System.in);
+            //get region from user
+            //*System.out.print("Enter Region: ");
+            //*String choosenRegion = scanner.nextLine();
+            //implement SQL query
+            //*String Query = "SELECT Name, Population, Region, City FROM world ORDER BY Population DESC";
+            //*ResultSet rs = stmt.executeQuery(Query);
+            // loop all the cities in a region
+            //*while (rs.next()) {
+                //*String city = rs.getString("Name");
+                //*int population = rs.getInt("Population");
+                //*String region = rs.getString("Region");
+                //if the region is the region choosen then display population
+                //*if(region.equals(choosenRegion)) {
+                    //*System.out.println(city + ": " + population);
+                //*}
+            //*}
+            //error message
+        //*} catch(SQLException e) {
+            //*System.out.println("Error: " + e.getMessage());
+        //*}
+    //*} //End of populated cities in region 
 
+        //The top N populated cities in the world where N is provided by the user
+        //*public static void Statement16() throws SQLException {
+        //connect to database
+        //*try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            //*Statement stmt = con.createStatement();
+            //*Scanner scanner = new Scanner(System.in);
+            //implement SQL query
+            //*String Query = "SELECT Name, Population, City FROM world ORDER BY Population DESC";
+            //*ResultSet rs = stmt.executeQuery(Query);
+                //*System.out.println(city + ": " + population);
+            //*}
+            //error message
+        //*} catch(SQLException e) {
+            //*System.out.println("Error: " + e.getMessage());
+        //*}
+    //*} //End of populated cities in world 
+
+//The top N populated cities in a district where N is provided by the user
+        //*public static void Statement16() throws SQLException {
+        //connect to database
+        //*try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            //*Statement stmt = con.createStatement();
+            //*Scanner scanner = new Scanner(System.in);
+            //get district from user
+            //*System.out.print("Enter District: ");
+            //*String choosenDistrict = scanner.nextLine();
+            //implement SQL query
+            //*String Query = "SELECT Name, Population, District, City FROM world ORDER BY Population DESC";
+            //*ResultSet rs = stmt.executeQuery(Query);
+            // loop all the cities in a district
+            //*while (rs.next()) {
+                //*String city = rs.getString("Name");
+                //*int population = rs.getInt("Population");
+                //*String district = rs.getString("District");
+                //if the district is the district choosen then display population
+                //*if(district.equals(choosenDistrict)) {
+                    //*System.out.println(city + ": " + population);
+                //*}
+            //*}
+            //error message
+        //*} catch(SQLException e) {
+            //*System.out.println("Error: " + e.getMessage());
+        //*}
+    //*} //End of populated cities in district 
+
+ //The top N populated cities in a country where N is provided by the user
+        //*public static void Statement16() throws SQLException {
+        //connect to database
+        //*try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            //*Statement stmt = con.createStatement();
+            //*Scanner scanner = new Scanner(System.in);
+            //get country from user
+            //*System.out.print("Enter Country: ");
+            //*String choosenCountry = scanner.nextLine();
+            //implement SQL query
+            //*String Query = "SELECT Name, Population, Region, City FROM world ORDER BY Population DESC";
+            //*ResultSet rs = stmt.executeQuery(Query);
+            // loop all the cities in a country
+            //*while (rs.next()) {
+                //*String city = rs.getString("Name");
+                //*int population = rs.getInt("Population");
+                //*String country = rs.getString("Country");
+                //if the country is the country choosen then display population
+                //*if(country.equals(choosenCountry)) {
+                    //*System.out.println(city + ": " + population);
+                //*}
+            //*}
+            //error message
+        //*} catch(SQLException e) {
+            //*System.out.println("Error: " + e.getMessage());
+        //*}
+    //*} //End of populated cities in country 
+
+ //The top N populated cities in a continent where N is provided by the user
+        //*public static void Statement16() throws SQLException {
+        //connect to database
+        //*try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            //*Statement stmt = con.createStatement();
+            //*Scanner scanner = new Scanner(System.in);
+            //get continent from user
+            //*System.out.print("Enter Continent: ");
+            //*String choosenContinent = scanner.nextLine();
+            //implement SQL query
+            //*String Query = "SELECT Name, Population, Continent, City FROM world ORDER BY Population DESC";
+            //*ResultSet rs = stmt.executeQuery(Query);
+            // loop all the cities in a continent
+            //*while (rs.next()) {
+                //*String city = rs.getString("Name");
+                //*int population = rs.getInt("Population");
+                //*String continent = rs.getString("Continent");
+                //if the continent is the continent choosen then display population
+                //*if(continent.equals(choosenContinent)) {
+                    //*System.out.println(city + ": " + population);
+                //*}
+            //*}
+            //error message
+        //*} catch(SQLException e) {
+            //*System.out.println("Error: " + e.getMessage());
+        //*}
+    //*} //End of populated cities in continent 
+ 
 }
