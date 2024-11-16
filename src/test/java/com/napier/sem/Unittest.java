@@ -90,7 +90,8 @@ private Transaction tx;
            //Retries the saved city and verifies its existence.
            City savedCity = session.get(City.class,city.getId());
            assertNotNull(savedCity);
-           assertEquals("Kabul",savedCity.getName());
+           assertEquals("Kabul",city.getName());
+           System.out.println("Saved city: " + savedCity);
        } catch (Exception e) {
            if (tx != null && tx.isActive()){
                tx.rollback();
@@ -124,6 +125,8 @@ private Transaction tx;
          Country savedCountry = session.get(Country.class,"AFG");
          assertNotNull(savedCountry);
          assertEquals("Afghanistan", savedCountry.getName());
+         System.out.println("Saved Country is:\n "+ country.getName()+ " " +country.getCode()+" "+ country.getCapital() +" "+ country.getGovernmentForm() +" " + country.getGnp()+" "+ country.getPopulation() +" "+ country.getGovernmentForm()+" " +country.getRegion() + " "+ country.getContinent() );
+    System.out.println("Works as expected");
      } catch (Exception e) {
          if (tx != null && tx.isActive()){
              tx.rollback();
