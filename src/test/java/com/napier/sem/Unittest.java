@@ -56,6 +56,7 @@ private Transaction tx;
         assertEquals(city.getDistrict(),"FakeDistrict");
         city.setPopulation(100);
         assertEquals(city.getPopulation(),100);
+        System.out.println("Fake City: " + city.getName() +" "+ city.getDistrict());
         //test would fail if the items returned don't match what is expected.
     }
 
