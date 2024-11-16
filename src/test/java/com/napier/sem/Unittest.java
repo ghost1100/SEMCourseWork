@@ -91,7 +91,7 @@ private Transaction tx;
            City savedCity = session.get(City.class,city.getId());
            assertNotNull(savedCity);
            assertEquals("Kabul",city.getName());
-           System.out.println("Saved city: " + savedCity);
+           System.out.println("Saved city: " + city.getName() +" "+ city.getId() +" "+ city.getPopulation()+ " " + city.getDistrict());
        } catch (Exception e) {
            if (tx != null && tx.isActive()){
                tx.rollback();
@@ -134,8 +134,6 @@ private Transaction tx;
          throw new RuntimeException(e);
      }
     }
-
-
 
     @AfterEach
     public void tearDown() {
