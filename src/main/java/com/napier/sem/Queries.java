@@ -102,6 +102,7 @@ public class Queries {
                         // Robbie, please edit the "" Statements later to display what the number of the issue is alongside what it does.
                         // like this: the N of City in the Country Where user provides \N, Issue #15
                         System.out.println("please choose which query you'd like to run");
+                        //Please change these to what the query does then add the issue number at the end.
                         System.out.println("SELECT Name, Population FROM city WHERE IsCapital = true ORDER BY Population DESC");
                         System.out.println("SELECT Name, Population FROM city WHERE IsCapital = true AND Region = '\" + chosenRegion + \"' ORDER BY Population DESC\"");
                         System.out.println("SELECT Name, Population FROM city WHERE IsCapital = true ORDER BY Population DESC LIMIT \" + N;");
