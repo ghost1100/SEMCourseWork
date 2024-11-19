@@ -122,11 +122,11 @@ public class Queries {
                             choice();
                         }
                         if (Num2 == 2) {
-                            Statement7();
+                            Statement7();//Works as expected!
                             choice();
                         }
                         if (Num2 == 1) {
-                            Statement6();
+                            Statement6();//Works as expected!
                             choice();
                         }
                         else {
@@ -441,13 +441,32 @@ public class Queries {
     }
 
     public static void Statement7() throws SQLException {
+
+        //Query to get the capital cities in a chosen region defined by user.
+        String query ="""
+            SELECT city.Name, city.Population
+            FROM country
+            JOIN city ON country.Capital = city.ID
+            WHERE country.Region = ?
+            ORDER BY city.Population DESC
+            """;
+
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
-            Statement stmt = con.createStatement();
+            PreparedStatement pstmt = con.prepareStatement(query);
             Scanner scanner = new Scanner(System.in);
+
+            //getting user input for the region
             System.out.print("Enter Region: ");
             String chosenRegion = scanner.nextLine();
-            String Query = "SELECT Name, Population FROM country WHERE Capital = true AND Region = '" + chosenRegion + "' ORDER BY Population DESC"; // select query which will get the name and population from the city table which the capital is in the region which is inputted
-            ResultSet rs = stmt.executeQuery(Query);
+
+            //Setting up the parameter for the prepared statement.
+            pstmt.setString(1, chosenRegion);
+
+            //Executing the Query.
+            ResultSet rs = pstmt.executeQuery();
+
+            //Displaying results.
+            System.out.println("Capital cities in region: " + chosenRegion);
             while (rs.next()) {
                 String city = rs.getString("Name");
                 int population = rs.getInt("Population");
