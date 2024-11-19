@@ -67,7 +67,7 @@ public class integrationtest {
 
     }
     @Test
-    public void TestUserInputAcceptance() {//issue with this test is that it doesn't work the compiler is in view only mode so itd be best to assign a static variable with the city name and change it before running the test to see if it works
+    public void CityDatabaseTest() {
 
         String TestCityName = "London" ;
 
