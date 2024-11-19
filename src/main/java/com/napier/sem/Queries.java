@@ -110,7 +110,7 @@ public class Queries {
 
                         int Num2 = sc.nextInt();
                         if (Num2 == 5) {
-                            Statement10();
+                            Statement10();// says we don't accept anything but numbers, doesn't work and asks for capital cities again this may be the 5th one asking for the same thing.....
                             choice();
                         }
                         if (Num2 == 4) {
