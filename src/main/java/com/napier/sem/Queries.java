@@ -114,11 +114,11 @@ public class Queries {
                             choice();
                         }
                         if (Num2 == 4) {
-                            Statement9();
+                            Statement9();//Doesn't Work Doesn't return anything seems to be an issue with the statement and the way it's ran
                             choice();
                         }
                         if (Num2 == 3) {
-                            Statement8();
+                            Statement8();//Works as expected!
                             choice();
                         }
                         if (Num2 == 2) {
@@ -478,22 +478,39 @@ public class Queries {
         }
     }
     public static void Statement8() throws SQLException {
+        //query
+        String query ="""
+                SELECT city.Name, city.Population
+                FROM country
+                JOIN city ON country.Capital = city.ID
+                ORDER BY city.Population DESC
+                LIMIT ?
+                """;
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
-            Statement stmt = con.createStatement();
+            PreparedStatement pstmt = con.prepareStatement(query);
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter the capital city to retrieve: ");
+            System.out.print("Enter the number of top capital cities you'd like to retrieve: ");
             int N = scanner.nextInt();
-            String Query = "SELECT Name, Population FROM country WHERE Capital = true ORDER BY Population DESC LIMIT " + N; // select statement
-            ResultSet rs = stmt.executeQuery(Query);
+
+            if (N <= 0) {
+                System.out.println("Please Enter a positive number");
+                return;
+            }
+            pstmt.setInt(1, N);
+
+            //Displaying the results/Executing the query.
+            ResultSet rs = pstmt.executeQuery();
+            System.out.println("Top " + N + " capital cities by Population:  ");
             while (rs.next()) {
                 String city = rs.getString("Name");
                 int population = rs.getInt("Population");
-                // Print
                 System.out.println(city + ": " + population);
             }
-        } catch(SQLException e) {
+        }
+        catch(SQLException e) {
             System.out.println("Error!! take a break!: " + e.getMessage());
         }
+
     }
     public static void Statement9() throws SQLException {
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
