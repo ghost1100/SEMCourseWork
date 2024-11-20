@@ -103,11 +103,11 @@ public class Queries {
                         // like this: the N of City in the Country Where user provides \N, Issue #15
                         System.out.println("please choose which query you'd like to run");
                         //Please change these to what the query does then add the issue number at the end.
-                        System.out.println("SELECT Name, Population FROM city WHERE IsCapital = true ORDER BY Population DESC");
-                        System.out.println("SELECT Name, Population FROM city WHERE IsCapital = true AND Region = '\" + chosenRegion + \"' ORDER BY Population DESC\"");
-                        System.out.println("SELECT Name, Population FROM city WHERE IsCapital = true ORDER BY Population DESC LIMIT \" + N;");
-                        System.out.println("SELECT Name, Population FROM city WHERE IsCapital = true AND Continent = '\" + chosenRegion + \"' ORDER BY Population DESC");
-                        System.out.println("SELECT Name, Population FROM city WHERE IsCapital = true AND Continent = '\" + continent + \"' ORDER BY Population DESC LIMIT \" + N");
+                        System.out.println("All the capital cities in the world organised by largest population to smallest #19");
+                        System.out.println("All the capital cities in a region organised by largest to smallest report #21");
+                        System.out.println("The top N populated capital cities in the world where N is provided by the user # 22");
+                        System.out.println("All the capital cities in a continent organised by largest population to smallest #20");
+                        System.out.println("The top N populated capital cities in a continent where N is provided by the user # 23");
 
                         int Num2 = sc.nextInt();
                         if (Num2 == 5) {
@@ -115,7 +115,7 @@ public class Queries {
                             choice();
                         }
                         if (Num2 == 4) {
-                            Statement9();//Doesn't Work Doesn't return anything seems to be an issue with the statement and the way it's ran
+                            Statement9();// works as expected!
                             choice();
                         }
                         if (Num2 == 3) {
@@ -517,9 +517,10 @@ public class Queries {
         try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter Region: ");
-            String chosenRegion = scanner.nextLine();
-            String Query = "SELECT Name, Population FROM country WHERE Capital = true AND Continent = '" + chosenRegion + "' ORDER BY Population DESC";
+            System.out.print(" enter continent: ");
+            String chosenContinent = scanner.nextLine();
+            String Query = "SELECT city.Name, city.Population FROM country " +
+                    "JOIN city ON country.Capital = city.ID = true AND Continent = '" + chosenContinent + "' ORDER BY Population DESC";
             ResultSet rs = stmt.executeQuery(Query);
             while (rs.next()) {
                 String city = rs.getString("Name"); // this will get the string name from the column name
