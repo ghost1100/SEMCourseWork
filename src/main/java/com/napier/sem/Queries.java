@@ -111,7 +111,7 @@ public class Queries {
 
                         int Num2 = sc.nextInt();
                         if (Num2 == 5) {
-                            Statement10();// says we don't accept anything but numbers, doesn't work and asks for capital cities again this may be the 5th one asking for the same thing.....
+                            Statement10();//Works as expected!
                             choice();
                         }
                         if (Num2 == 4) {
@@ -533,27 +533,38 @@ public class Queries {
         }
     }
     public static void Statement10() throws SQLException {
-        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
-            Statement stmt = con.createStatement();
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter the capital city to retrieve: "); // user input to enter a capital city
-            int N = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
-            System.out.print("Enter the continent: "); // user input allowing user to enter a continent
-            String continent = scanner.nextLine();
-            String Query = "SELECT Name, Population FROM country WHERE Capital = true AND Continent = '" + continent + "' ORDER BY Population DESC LIMIT " + N;
-            ResultSet rs = stmt.executeQuery(Query);
-            while (rs.next()) {
-                String city = rs.getString("Name"); // will get the name from the column name
-                int population = rs.getInt("Population"); // will get the population from the column population
-                // Print
-                System.out.println(city + ": " + population); // this will print the capital city along with the population
+
+        String jdbcurl = "jdbc:mysql://localhost:3306/world";
+        String username = "root";
+        String password = "BkQR7Aczt";
+        try(Connection con = DriverManager.getConnection(jdbcurl, username, password)) {
+            Scanner scanner = new Scanner(System.in);{
+                System.out.print("Enter the number of top capital cities you want to retrieve: ");
+                int N = scanner.nextInt();
+                scanner.nextLine();
+                System.out.print("Enter the continent: ");
+                String chosenContinent = scanner.nextLine();
+
+                String query = "SELECT Name, Population FROM country WHERE Continent = ? AND Capital IS NOT NULL ORDER BY Population DESC LIMIT ?";
+                try(PreparedStatement pstmt = con.prepareStatement(query)) {
+                    pstmt.setString(1, chosenContinent);
+                    pstmt.setInt(2, N);
+                    ResultSet rs = pstmt.executeQuery();
+
+                    System.out.println("Top " + N + " capital cities by Population:  ");
+                    while (rs.next()) {
+                        String city = rs.getString("Name");
+                        int population = rs.getInt("Population");
+                        System.out.println(city + ": " + population);
+
+                    }
+                }catch(SQLException e) {
+                    System.out.println("Error!! take a break!: " + e.getMessage());
+                }
             }
-        } catch (SQLException e) {
-            System.out.println("Error!! take a break!: " + e.getMessage());
         }
-    }
-    ///Start of Erin's work (It's an attempt, we don't need to talk about why it's not working just yet, note that the //* are the acc lines of code) I noticed and Honestly great Idea.
+       }
+    ///Start of Erin's work (It's an attempt, we don't need to talk about why it's not working just yet, note that the //* are the acc lines of code) I noticed and Honestly, great Idea.
     //The top N populated cities in a region where N is provided by the user ///*What's Missing here is the Issue Number!!
     public static void Statement16() throws SQLException {
         //connect to database
