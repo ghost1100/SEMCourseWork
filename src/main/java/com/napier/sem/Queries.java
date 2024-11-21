@@ -277,6 +277,40 @@ public class Queries {
         }
     }
 
+    //The top N populated capital cities in a region where N is provided by the user
+    public static void Statement21() throws SQLException {
+        //open database
+        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+            Statement stmt = con.createStatement();
+            Scanner scanner = new Scanner(System.in);
+            //get N from user
+            System.out.print("Enter N: ");
+            int n = Integer.parseInt(scanner.nextLine());
+            //implement SQL query
+            String Query = "SELECT Capital, Population FROM country GROUP BY Region ORDER BY Population DESC";
+            ResultSet rs = stmt.executeQuery(Query);
+            //initialise count
+            int count = 0;
+            //loop top N populated countries
+            while (rs.next()) {
+                String Capital = rs.getString("Capital");
+                int population = rs.getInt("Population");
+                String Region = rs.getString("Region");
+                System.out.println("Region: "+ Region +", " + "Capital: " + Capital + ", " + "Population: " + population);
+                count++;
+                //if count is greater than n then the loop ends
+                if (count >= n) {
+                    break;
+                }
+            }
+            //error message
+        } catch(SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    
+
     //The top N populated countries in the world where N is provided by the user #22
     public static void Statement5() throws SQLException {
         //open database
