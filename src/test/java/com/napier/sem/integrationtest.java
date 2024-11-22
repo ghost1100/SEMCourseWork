@@ -1,8 +1,6 @@
 package com.napier.sem;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.sql.*;
 
 public class integrationtest {
@@ -19,14 +17,10 @@ public class integrationtest {
 
     @Test
     public void TestDataConnection() {
-        String jdbcurl = "jdbc:mysql://localhost:3306/world";
-        String username = "root";
-        String password = "BkQR7Aczt";
-        try (Connection Con = DriverManager.getConnection(jdbcurl, username, password)) {
+        //Testing the Connection without Extracting or Adding anything.
+        try (Connection Con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
             assertNotNull(Con, "Database Connection Should Not Be Null");
-
             System.out.println("Connection Successful");
-
         } catch (SQLException e) {
             fail("Database connection Failed: " + e.getMessage());
         }
@@ -35,10 +29,8 @@ public class integrationtest {
 
     @Test
     public void TestDataExtraction() {
-        String jdbcurl = "jdbc:mysql://localhost:3306/world";
-        String username = "root";
-        String password = "BkQR7Aczt";
-        try (Connection Con = DriverManager.getConnection(jdbcurl, username, password)) {
+        //Testing Data Extraction by Exporting the Table Schema Names from the Database World
+        try (Connection Con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
             Statement stmt = Con.createStatement();
             assertNotNull(Con, "Database Connection Should Not Be Null");
             String Query = "SELECT table_name FROM information_schema.tables WHERE table_schema = 'world'";
@@ -67,17 +59,14 @@ public class integrationtest {
     }
     @Test
     public void CityDatabaseTest() {
-
+//Extracting information based on city in this case london but since cities can change in a second based on current world events,
+// a simple fix would be changing the string below from london to another city of your choosing.
         String TestCityName = "London" ;
 
         String query = "SELECT ID, Name, CountryCode, District, Population FROM city WHERE Name LIKE ?";// the ? is used as a place-holder to mark where the scanners input will be placed
-//database information
-        String jdbcurl = "jdbc:mysql://localhost:3306/world";
-        String username = "root";
-        String password = "BkQR7Aczt";
         int Count = 0;
         //try the method used to link database information with the driver manager.
-        try (Connection Con = DriverManager.getConnection(jdbcurl, username, password);
+        try (Connection Con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password());
              PreparedStatement pstmt = Con.prepareStatement(query)) {
             // this is saying the prepared statement is equal to the query plus the users input which relies on the scanner object
             pstmt.setString(1, "%" + TestCityName + "%");// the % is used for pattern matching the pattern used here is name as long as the letters match it shouldn't be concerned if the name is in upper or lower case.

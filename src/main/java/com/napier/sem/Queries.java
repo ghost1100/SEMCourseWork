@@ -3,7 +3,6 @@ import java.sql.*;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
-
 /**
  * this class will be used to create an array of some sorts (will figure that out later...) to store Predetermined Queries and a switch statement to display a dew options to the user.
  * one of the options would be to display the pre-made queries and the other option would be used to exit the app.
@@ -201,12 +200,7 @@ public class Queries {
             System.out.println("Invalid Query");
             return;
         }
-
-        String jdbcurl = "jdbc:mysql://localhost:3306/world";
-        String username = "root";
-        String password = "BkQR7Aczt";
-
-        try (Connection Con = DriverManager.getConnection(jdbcurl, username, password);
+        try (Connection Con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password());
              Statement stmt = Con.createStatement()) {
             ResultSet rs = stmt.executeQuery(PREDEFINED_QUERIES[index]);
             while (rs.next()) {
@@ -228,11 +222,9 @@ public class Queries {
         String Name = sc.nextLine();
         String query = "SELECT ID, Name, CountryCode, District, Population FROM city WHERE Name LIKE ?";// the ? is used as a place-holder to mark where the scanners input will be placed
 //database information
-        String jdbcurl = "jdbc:mysql://localhost:3306/world";
-        String username = "root";
-        String password = "BkQR7Aczt";
+      
         //try the method used to link database information with the driver manager.
-        try (Connection Con = DriverManager.getConnection(jdbcurl, username, password);
+        try (Connection Con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password());
              PreparedStatement pstmt = Con.prepareStatement(query)) {
             // this is saying the prepared statement is equal to the query plus the users input which relies on the scanner object
             pstmt.setString(1, "%" + Name + "%");// the % is used for pattern matching the pattern used here is name as long as the letters match it shouldn't be concerned if the name is in upper or lower case.
@@ -255,10 +247,8 @@ public class Queries {
         String DistrictName = sc.nextLine();
         String query = "SELECT country.Name AS CountryName, country.Code AS CountryCode, country.Continent, country.Region, country.SurfaceArea, country.IndepYear, country.Population AS CountryPopulation, city.Name AS CityName, city.District, city.Population AS CityPopulation, countrylanguage.Language, countrylanguage.Isofficial, countrylanguage.Percentage FROM country INNER JOIN city ON country.Code = city.CountryCode INNER JOIN countrylanguage ON country.Code = countrylanguage.CountryCode WHERE city.Name LIKE ?";
         /// used inner join to combine the three tables and look up countries based on the district name
-        String jdbcurl = "jdbc:mysql://localhost:3306/world";
-        String username = "root";
-        String password = "BkQR7Aczt";
-        try (Connection Con = DriverManager.getConnection(jdbcurl, username, password);
+      
+        try (Connection Con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password());
              PreparedStatement pstmt = Con.prepareStatement(query)) {
             pstmt.setString(1, "%" + DistrictName + "%");
             ResultSet rs = pstmt.executeQuery();
@@ -280,7 +270,7 @@ public class Queries {
     //The top N populated capital cities in a region where N is provided by the user
     public static void Statement21() throws SQLException {
         //open database
-        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+        try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
             //get N from user
@@ -314,7 +304,7 @@ public class Queries {
     //The top N populated countries in the world where N is provided by the user #22
     public static void Statement5() throws SQLException {
         //open database
-        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+        try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
             //get N from user
@@ -345,7 +335,7 @@ public class Queries {
     //The top N populated countries in a continent where N is provided by the user #23
     public static void Statement4() throws SQLException {
         //open database
-        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+        try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
             //get the continent from the user
@@ -383,7 +373,7 @@ public class Queries {
     //All the countries in a region organised by largest population to the smallest report #21
     public static void Statement3() throws SQLException {
         //connect to database
-        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+        try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
             //get region from user
@@ -411,7 +401,7 @@ public class Queries {
     //All the countries in a continent organised by largest population to the smallest report #20
     public static void Statement2() throws SQLException {
         //open database
-        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+        try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
             //get continent from user
@@ -440,7 +430,7 @@ public class Queries {
     //All the countries in the world organised by largest population to the smallest report #19
     public static void Statement1() throws SQLException {
         //open database
-        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+        try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
             Statement stmt = con.createStatement();
 
             //implement SQL query
@@ -458,7 +448,7 @@ public class Queries {
         }// instead of using an array or switch case within a switch case again I took the lazy route by just adding if statements and a catch at the end.
     }
     public static void Statement6() throws SQLException {
-        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+        try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
             Statement stmt = con.createStatement();
             String Query = "SELECT city.Name, city.Population FROM country " +
                     "JOIN city ON country.Capital = city.ID " +
@@ -486,7 +476,7 @@ public class Queries {
             ORDER BY city.Population DESC
             """;
 
-        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+        try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
             PreparedStatement pstmt = con.prepareStatement(query);
             Scanner scanner = new Scanner(System.in);
 
@@ -521,7 +511,7 @@ public class Queries {
                 ORDER BY city.Population DESC
                 LIMIT ?
                 """;
-        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+        try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
             PreparedStatement pstmt = con.prepareStatement(query);
             Scanner scanner = new Scanner(System.in);
             System.out.print("Enter the number of top capital cities you'd like to retrieve: ");
@@ -548,7 +538,7 @@ public class Queries {
 
     }
     public static void Statement9() throws SQLException {
-        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+        try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
             System.out.print(" enter continent: ");
@@ -568,10 +558,8 @@ public class Queries {
     }
     public static void Statement10() throws SQLException {
 
-        String jdbcurl = "jdbc:mysql://localhost:3306/world";
-        String username = "root";
-        String password = "BkQR7Aczt";
-        try(Connection con = DriverManager.getConnection(jdbcurl, username, password)) {
+      
+        try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
             Scanner scanner = new Scanner(System.in);{
                 System.out.print("Enter the number of top capital cities you want to retrieve: ");
                 int N = scanner.nextInt();
@@ -602,7 +590,7 @@ public class Queries {
     //The top N populated cities in a region where N is provided by the user ///*What's Missing here is the Issue Number!!
     public static void Statement16() throws SQLException {
         //connect to database
-        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+        try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
             Scanner scanner = new Scanner(System.in);
             //get region from user
             System.out.print("Enter Region: ");
@@ -634,7 +622,7 @@ public class Queries {
     //be careful you've named all of them statement 16 which will cause issues later.
     public static void Statement17() throws SQLException {
         //connect to database
-        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+        try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
             Scanner scanner = new Scanner(System.in);
             System.out.print("Enter the number of top populated cities to display: ");
             int N = scanner.nextInt();
@@ -663,7 +651,7 @@ public class Queries {
     //The top N populated cities in a district where N is provided by the user
     public static void Statement18() throws SQLException {
         //connect to database
-        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+        try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
             Scanner scanner = new Scanner(System.in);
             // Gets district from user
             System.out.println("Enter District: ");
@@ -698,7 +686,7 @@ public class Queries {
     //The top N populated cities in a country where N is provided by the user
     public static void Statement19() throws SQLException {
         //connect to database
-        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+        try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
             //get country from user
@@ -737,7 +725,7 @@ public class Queries {
     //The top N populated cities in a continent where N is provided by the user
     public static void Statement20() throws SQLException {
         //connect to database
-        try(Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/world", "root", "BkQR7Aczt")) {
+        try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
             Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
 
