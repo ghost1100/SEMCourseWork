@@ -102,7 +102,6 @@ private Transaction tx;
     private @NotNull City getCity() {
 
         City city = new City();
-        city.setId(1);
         city.setName("FakeCity");
         city.setDistrict("FakeDistrict");
         city.setCountryCode("FCT");
@@ -121,7 +120,7 @@ private Transaction tx;
          Country savedCountry = session.get(Country.class,"AFG");
          assertNotNull(savedCountry);
          assertEquals("Afghanistan", savedCountry.getName());
-         System.out.println("Saved Country is:\n "+ country.getName()+ " " +country.getCode()+" "+ country.getCapital() +" "+ country.getGovernmentForm() +" " + country.getGnp()+" "+ country.getPopulation() +" "+ country.getGovernmentForm()+" " +country.getRegion() + " "+ country.getContinent() );
+         System.out.println("Saved Country is:\n "+"Name: "+ country.getName()+ " Code: " +country.getCode()+" Capital: "+ country.getCapital() +" GovForm: "+ country.getGovernmentForm() +" GNP: " + country.getGnp()+" Population: "+ country.getPopulation() +" Region: " +country.getRegion() + " Continent: "+ country.getContinent() );
     System.out.println("Works as expected");
      } catch (Exception e) {
          if (tx != null && tx.isActive()){
