@@ -3,6 +3,7 @@ package com.napier.sem;
 ///API Tester Imports.
 import com.mysql.cj.protocol.x.Notice;
 import org.hibernate.*;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -79,50 +80,44 @@ private Transaction tx;
     @Test
     public void testSaveCity() {
         // creates an instance of the table and sets its information based on what's in the other classes just so that it follows their structure.
-       try {
-           City city = new City();
-           city.setName("Kabul");
-           city.setPopulation(17800000);
-           city.setDistrict("Kabul");
-           city.setCountryCode("AFG");
-           //saves the created city entity
-           session.persist(city);
-           tx.commit();
-           //Retries the saved city and verifies its existence.
-           City savedCity = session.get(City.class,city.getId());
-           assertNotNull(savedCity);
-           assertEquals("Kabul",city.getName());
-           System.out.println("Saved city: " + city.getName() +" "+ city.getId() +" "+ city.getPopulation()+ " " + city.getDistrict());
-       } catch (Exception e) {
-           if (tx != null && tx.isActive()){
-               tx.rollback();
-           }
-           throw new RuntimeException(e);
-       }
-
+        try {
+            City city = getCity();
+            //saves the created city entity
+            session.persist(city);
+            tx.commit();
+            //Retrieves the saved city and verifies its existence.
+            City savedCity = session.get(City.class, city.getId());
+            assertNotNull(savedCity);
+            assertEquals("FakeCity", city.getName());
+            System.out.println("Saved city: " + city.getName() + " " + city.getId() + " " + city.getPopulation() + " " + city.getDistrict());
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+            throw new RuntimeException(e);
+        }
 
     }
+
+    private @NotNull City getCity() {
+
+        City city = new City();
+        city.setId(1);
+        city.setName("FakeCity");
+        city.setDistrict("FakeDistrict");
+        city.setCountryCode("FCT");
+        city.setPopulation(100);
+        return city;
+    }
+
     @Test
     public void testSaveCountry() {
      try {
-         Country country = new Country();
-         country.setCode("AFG");
-         country.setName("Afghanistan");
-         country.setContinent(Continent.Asia);
-         country.setRegion("Asia");
-         country.setPopulation(1780000);
-         country.setCapital("Washington");
-         country.setGnp(String.valueOf(15.62));
-         country.setGovernmentForm("Islamic Emirate of Afghanistan");
-         country.setHeadOfState("King Mohammad Zahir Shah");
-         country.setGovernmentForm("Dictatorship");
-         country.setIndepYear(1919);
-         country.setLocalName("Afghanistan");
-         country.setSurfaceArea(652860);
+         Country country = getCountry();
          //saves the created country entity
          session.persist(country);
          tx.commit();
-         //Retries the saved country and verifies its existence.
+         //Retrieves the saved country and verifies its existence.
          Country savedCountry = session.get(Country.class,"AFG");
          assertNotNull(savedCountry);
          assertEquals("Afghanistan", savedCountry.getName());
@@ -134,6 +129,24 @@ private Transaction tx;
          }
          throw new RuntimeException(e);
      }
+    }
+
+    private static @NotNull Country getCountry() {
+        Country country = new Country();
+        country.setCode("AFG");
+        country.setName("Afghanistan");
+        country.setContinent(Continent.Asia);
+        country.setRegion("Asia");
+        country.setPopulation(1780000);
+        country.setCapital("Washington");
+        country.setGnp(String.valueOf(15.62));
+        country.setGovernmentForm("Islamic Emirate of Afghanistan");
+        country.setHeadOfState("King Mohammad Zahir Shah");
+        country.setGovernmentForm("Dictatorship");
+        country.setIndepYear(1919);
+        country.setLocalName("Afghanistan");
+        country.setSurfaceArea(652860);
+        return country;
     }
 
     @AfterEach
