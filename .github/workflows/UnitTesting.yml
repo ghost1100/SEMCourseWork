@@ -25,9 +25,17 @@ jobs:
 
          #run tests on maven.
       - name: Run Maven Tests
-         env:
-        HIBERNATE_CONFIG: hibernate.cfg.xml
-        run: mvn clean test
+        env:
+          HIBERNATE_CONFIG: hibernate.cfg.xml
+          run: mvn clean test
+           #uploading the test reports
+      - name: Archive test results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with: 
+           name: test-results
+           path: target/surefire-reports/
+        
         
          
        
