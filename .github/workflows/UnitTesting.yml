@@ -1,0 +1,36 @@
+name: A workflow for Assessment App
+on: push
+
+jobs:
+  build:
+    name: Assessment action
+    runs-on: ubuntu-20.04
+    #checking out to the code.
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        #setting up java or testing enviroment.
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          #cacheing maven dependancies.
+      - name: Cache Maven repository
+        uses: actions/cache@v2
+        with:
+         path: ~/.m2/repository
+         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+         restore-key: ${{ runner.os }}-maven
+
+         #run tests on maven.
+      - name: Run Maven Tests
+         env:
+        HIBERNATE_CONFIG: hibernate.cfg.xml
+        run: mvn clean test
+        
+         
+       
+   
+          
+         
