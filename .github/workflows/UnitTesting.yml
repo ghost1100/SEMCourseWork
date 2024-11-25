@@ -1,9 +1,9 @@
-name: A workflow for Testing Purposes
+name: Test Workflow
 on:
  push:
   branches:
-   -Master
-   -New-Feature
+   -master
+   -DevelopGUI
   
 jobs:
   build:
@@ -32,7 +32,7 @@ jobs:
       - name: Run Maven Tests
         env:
           HIBERNATE_CONFIG: hibernate.cfg.xml
-          run: mvn clean test
+        run: mvn clean test
            #uploading the test reports
       - name: Archive test results
         if: always()
