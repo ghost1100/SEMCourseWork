@@ -1,9 +1,13 @@
-name: A workflow for Assessment App
-on: push
-
+name: A workflow for Testing Purposes
+on:
+ push:
+  branches:
+   -Master
+   -New-Feature
+  
 jobs:
   build:
-    name: Assessment action
+    name: Run Tests
     runs-on: ubuntu-20.04
     #checking out to the code.
     steps:
@@ -17,11 +21,12 @@ jobs:
           distribution: 'adopt'
           #cacheing maven dependancies.
       - name: Cache Maven repository
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
          path: ~/.m2/repository
          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-         restore-key: ${{ runner.os }}-maven
+         restore-key:  |
+          ${{ runner.os }}-maven
 
          #run tests on maven.
       - name: Run Maven Tests
@@ -31,11 +36,14 @@ jobs:
            #uploading the test reports
       - name: Archive test results
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with: 
            name: test-results
            path: target/surefire-reports/
         
+      - name: Run Integration Tests
+        run: mvn clean verify -p integration-tests
+             
         
          
        
