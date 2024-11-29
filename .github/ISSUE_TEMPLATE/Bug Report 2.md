@@ -26,6 +26,7 @@ Steps to reproduce the behavior:
 Each query number should match with the number given to the requirement. 
 
 **Screenshots**
+<img width="782" alt="Screenshot 2024-11-29 at 2 34 24 PM" src="https://github.com/user-attachments/assets/96572e78-8177-4bf0-912f-546b508b2609">
 
 
 **Desktop (please complete the following information):**
