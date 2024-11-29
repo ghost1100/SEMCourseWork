@@ -1,9 +1,13 @@
 
 ---
 name: Bug report 2: 
+
 about: Connection between queries and requirement numbers  
+
 title: Query Numbers  
+
 labels: Query numbers mismatch 
+
 assignees: Rachel
 
 ---
