@@ -1,7 +1,7 @@
 
 ---
 name: Bug report 2: 
-about: Connection between queries and issues 
+about: Connection between queries and requirement numbers  
 title: Query Numbers  
 labels: Query numbers mismatch 
 assignees: Rachel
@@ -9,7 +9,7 @@ assignees: Rachel
 ---
 
 **Describe the bug**
-The query numbers do not match the corrosponding issue numbers on github or zube. 
+The query numbers do not match with the allocated requirement numbers  
 
 **To Reproduce**
 Steps to reproduce the behavior:
@@ -19,10 +19,9 @@ Steps to reproduce the behavior:
 4. See that the issue number (#19) does not match the query number (1)
 
 **Expected behavior**
-
+Each query number should match with the number given to the requirement. 
 
 **Screenshots**
-
 
 
 **Desktop (please complete the following information):**
@@ -32,4 +31,4 @@ Steps to reproduce the behavior:
 
 
 **Additional context**
-
+Issue number on github and zube are not necessarily accurate as they include other tasks as well as requirments 
