@@ -23,7 +23,7 @@ Steps to reproduce the behavior:
 4. See that the issue number (#19) does not match the query number (1)
 
 **Expected behavior**
-Each query number should match with the number given to the requirement. 
+Each query number should match with the number given to the requirement. As it does not an error will not appear but the code will be less readable. 
 
 **Screenshots**
 
