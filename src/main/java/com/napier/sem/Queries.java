@@ -267,7 +267,7 @@ public class Queries {
         }
     }
 
-    //The top N populated capital cities in a region where N is provided by the user
+    /**(//The top N populated capital cities in a region where N is provided by the user
     public static void Statement21() throws SQLException {
         //open database
         try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
@@ -298,6 +298,7 @@ public class Queries {
             System.out.println("Error: " + e.getMessage());
         }
     }
+     */
 
     
 
