@@ -1,10 +1,8 @@
 ///Package Imports.
 package com.napier.sem;
 ///API Tester Imports.
-import com.mysql.cj.protocol.x.Notice;
 import org.hibernate.*;
 import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +17,9 @@ import static org.junit.jupiter.api.Assertions.*;
  * class holding the unit tests.
  * I will test the input, output , error handling and I will use an in memory database for additional testing
  */
-public class Unittest {
+public class UnitTests {
+
+
 private SessionFactory sessionFactory;
 private Session session;
 private Transaction tx;
