@@ -65,6 +65,10 @@ private Transaction tx;
     public void testSession() {
         try {
             SessionFactory factory = new Configuration().configure().buildSessionFactory();
+            factory.openSession();
+            factory.getCache();
+            factory.close();
+
         } catch (Throwable ex) {
             System.err.println("Failed to create sessionFactory object." + ex);
             throw new ExceptionInInitializerError(ex);
