@@ -26,9 +26,9 @@ public class Queries {
             //all the cities in a country from the largest population to smallest in this case its france, Issue Number 12...
             "SELECT city.Name, city.CountryCode, city.Population  FROM city INNER JOIN country ON city.CountryCode = country.Code Where country.Name = 'France' ORDER BY population DESC",
             // All the cities in a region organized by the largest population to the smallest, Issue Number 11...
-                "SELECT city.Name, city.CountryCode, city.Population FROM city INNER JOIN country ON city.CountryCode = country.Code WHERE country.Region = 'Queensland' ORDER BY city.Population DESC;",
+            "SELECT city.Name, city.CountryCode, city.Population FROM city INNER JOIN country ON city.CountryCode = country.Code WHERE country.Region = 'Micronesia' ORDER BY city.Population DESC;",
             //Information (the number of people who speak certain languages from the greatest number to smallest, including the percentage of the world population) that the company wants issue number 29
-                "SELECT cl.Language, SUM(c.Population * cl.Percentage / 100) AS TotalSpeakers, SUM(c.Population * cl.Percentage / 100) / (SELECT SUM(Population) FROM country) * 100 AS WorldPercentage FROM country c INNER JOIN countrylanguage cl ON c.Code = cl.CountryCode GROUP BY cl.Language ORDER BY TotalSpeakers DESC;\n"
+            "SELECT cl.Language, SUM(c.Population * cl.Percentage / 100) AS TotalSpeakers, SUM(c.Population * cl.Percentage / 100) / (SELECT SUM(Population) FROM country) * 100 AS WorldPercentage FROM country c INNER JOIN countrylanguage cl ON c.Code = cl.CountryCode GROUP BY cl.Language ORDER BY TotalSpeakers DESC;\n"
     };
 
     public static void choice() {
@@ -228,7 +228,7 @@ public class Queries {
         String Name = sc.nextLine();
         String query = "SELECT ID, Name, CountryCode, District, Population FROM city WHERE Name LIKE ?";// the ? is used as a place-holder to mark where the scanner input will be placed
 //database information
-      
+
         //try the method used to link database information with the driver manager.
         try (Connection Con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password());
              PreparedStatement pstmt = Con.prepareStatement(query)) {
@@ -253,7 +253,7 @@ public class Queries {
         String DistrictName = sc.nextLine();
         String query = "SELECT country.Name AS CountryName, country.Code AS CountryCode, country.Continent, country.Region, country.SurfaceArea, country.IndepYear, country.Population AS CountryPopulation, city.Name AS CityName, city.District, city.Population AS CityPopulation, countrylanguage.Language, countrylanguage.Isofficial, countrylanguage.Percentage FROM country INNER JOIN city ON country.Code = city.CountryCode INNER JOIN countrylanguage ON country.Code = countrylanguage.CountryCode WHERE city.Name LIKE ?";
         /// used inner join to combine the three tables and look up countries based on the district name
-      
+
         try (Connection Con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password());
              PreparedStatement pstmt = Con.prepareStatement(query)) {
             pstmt.setString(1, "%" + DistrictName + "%");
@@ -306,7 +306,7 @@ public class Queries {
     }
      */
 
-    
+
 
     //The top N populated countries in the world where N is provided by the user #22
     public static void Statement5() throws SQLException {
@@ -565,7 +565,7 @@ public class Queries {
     }
     public static void Statement10() throws SQLException {
 
-      
+
         try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
             Scanner scanner = new Scanner(System.in);{
                 System.out.print("Enter the number of top capital cities you want to retrieve: ");
