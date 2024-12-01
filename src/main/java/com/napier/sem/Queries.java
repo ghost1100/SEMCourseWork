@@ -25,7 +25,8 @@ public class Queries {
             " SELECT city.Name, city.CountryCode, city.Population  FROM city INNER JOIN country ON city.CountryCode = country.Code Where city.District = 'Scotland' ORDER BY population DESC ",
             //all the cities in a country from the largest population to smallest in this case its france, Issue Number 12...
             "SELECT city.Name, city.CountryCode, city.Population  FROM city INNER JOIN country ON city.CountryCode = country.Code Where country.Name = 'France' ORDER BY population DESC",
-            // All the cities in a region organised by largest population to the smallest, Issue Number 11...last query to add.
+            // All the cities in a region organised by the largest population to the smallest, Issue Number 11...
+                "SELECT city.Name, city.CountryCode, city.Population FROM city INNER JOIN country ON city.CountryCode = country.Code WHERE country.Region = 'Queensland' ORDER BY city.Population DESC;",
             //Information (the number of people who speak certain languages from the greatest number to smallest, including the percentage of the world population) that the company wants
 
     };
@@ -191,11 +192,11 @@ public class Queries {
 
     private static void displayQueries() {
         System.out.println("please choose which query you'd like to run");
-        System.out.println("1. selects every city based on most populated first, Issue Number 9...");
-        System.out.println("2. selects the most popular cities in a continent this time its Asia, Issue Number 10...");
-        System.out.println("3.selects the most popular Cities in a District, Issue Number 13...");
-        System.out.println("4.all the cities in a country from the largest population to smallest in this case its france, Issue Number 12...");
-        System.out.println("5.Information (the number of people who speak certain languages from greatest number to smallest, including the percentage of the world population) that the company wants issue Number 29 ");
+        System.out.println("1.Selects every city based on most populated first, Issue Number 9...");
+        System.out.println("2.Selects the most popular cities in a continent this time its Asia, Issue Number 10...");
+        System.out.println("3.Selects the most popular Cities in a District, Issue Number 13...");
+        System.out.println("4.All the cities in a country from the largest population to smallest in this case its france, Issue Number 12...");
+        System.out.println("5.All the cities in a region organised by the largest population to the smallest, Issue Number 11.. ");
 
 
     }
