@@ -3,11 +3,11 @@ name: Test Workflow
 on:
   push:
     branches:
-      - master
+      - Master
       - feature/DevelopGUI
   pull_request:
     branches:
-      - master
+      - Master
       - feature/DevelopGUI
 
 jobs:
