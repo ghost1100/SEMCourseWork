@@ -26,6 +26,8 @@ public class Queries {
             //all the cities in a country from the largest population to smallest in this case its france, Issue Number 12...
             "SELECT city.Name, city.CountryCode, city.Population  FROM city INNER JOIN country ON city.CountryCode = country.Code Where country.Name = 'France' ORDER BY population DESC",
             // All the cities in a region organised by largest population to the smallest, Issue Number 11...last query to add.
+            //Information (the number of people who speak certain languages from the greatest number to smallest, including the percentage of the world population) that the company wants
+
     };
 
     public static void choice() {
@@ -35,17 +37,17 @@ public class Queries {
         do {
             System.out.println("Welcome to Napier Sem Course Application");
             System.out.println("Enter Number For Desired Query");
-            System.out.println("1.Display Available Queries Issues Number 9,10,13,12,(11 not yet added)");
+            System.out.println("1.Display Available Queries ");
             System.out.println("2.Create Your Own City Queries");
             System.out.println("3.Create Your Own Country Queries");
             System.out.println("4.Rachel's Queries");
             System.out.println("5.Robbie's Queries");
             System.out.println("6.Erin's Queries Soon to Be Issue Num 20-35");
             System.out.println("7.Exit APP");
-// number 1 which is display available queries is basically a dynamic switch case within a static one allowing me to modify its length at any time without having to go and change the numbers over and over like a static one would.
-            //it mostly relies on the for loop as long as the input is bigger than i but smaller than the predefined list it will increment I and execute the query in the list
-            //then there is the if statement saying is the index which == predefined queries is smaller than 0 which = I then the choice isn't valid which is an error detection and handling method.
-            // it also invalidates the users choice if it turns out to be bigger than the specified index
+//  number 1 which is display available queries is basically a dynamic switch case within a static one allowing me to modify its length at any time without having to go and change the numbers over and over like a static one would.
+// it mostly relies on the for loop as long as the input is bigger than i but smaller than the predefined list it will increment I and execute the query in the list
+// then there is the if statement saying is the index which == predefined queries is smaller than 0 which = I then the choice isn't valid which is an error detection and handling method.
+//  it also invalidates the users choice if it turns out to be bigger than the specified index
             try {
                 query = sc.nextInt();
 
@@ -56,7 +58,8 @@ public class Queries {
                         executeQuery(querychoice - 1);
                         break;
                     case 2:
-                        System.out.println("Create your own City query");// allows the user the option to choose a city name and, it will list out the city's details I plan to build up on this by using the sql join method to display the language and other similar details however the current time frame doesn't allow for that.
+                        System.out.println("Create your own City query");
+                        // allows the user the option to choose a city name and, it will list out the city's details I plan to build up on this by using the sql join method to display the language and other similar details however the current time frame doesn't allow for that.
                         CreateCityQueries();
                         break;
                     case 3:
@@ -187,11 +190,13 @@ public class Queries {
     }
 
     private static void displayQueries() {
-        System.out.println("Available Queries");
-        for (int i = 0; i < PREDEFINED_QUERIES.length; i++) {
-            System.out.println((i + 1) + " . " + PREDEFINED_QUERIES[i]);
-        }
-        System.out.println("Select a query to run (1-" + PREDEFINED_QUERIES.length + "):");
+        System.out.println("please choose which query you'd like to run");
+        System.out.println("1. selects every city based on most populated first, Issue Number 9...");
+        System.out.println("2. selects the most popular cities in a continent this time its Asia, Issue Number 10...");
+        System.out.println("3.selects the most popular Cities in a District, Issue Number 13...");
+        System.out.println("4.all the cities in a country from the largest population to smallest in this case its france, Issue Number 12...");
+        System.out.println("5.Information (the number of people who speak certain languages from greatest number to smallest, including the percentage of the world population) that the company wants issue Number 29 ");
+
 
     }
 
