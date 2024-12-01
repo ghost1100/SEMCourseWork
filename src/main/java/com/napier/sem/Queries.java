@@ -28,7 +28,7 @@ public class Queries {
             // All the cities in a region organised by the largest population to the smallest, Issue Number 11...
                 "SELECT city.Name, city.CountryCode, city.Population FROM city INNER JOIN country ON city.CountryCode = country.Code WHERE country.Region = 'Queensland' ORDER BY city.Population DESC;",
             //Information (the number of people who speak certain languages from the greatest number to smallest, including the percentage of the world population) that the company wants
-
+                "SELECT cl.Language, SUM(c.Population * cl.Percentage / 100) AS TotalSpeakers, SUM(c.Population * cl.Percentage / 100) / (SELECT SUM(Population) FROM country) * 100 AS WorldPercentage FROM country c INNER JOIN countrylanguage cl ON c.Code = cl.CountryCode GROUP BY cl.Language ORDER BY TotalSpeakers DESC;\n"
     };
 
     public static void choice() {
@@ -45,10 +45,10 @@ public class Queries {
             System.out.println("5.Robbie's Queries");
             System.out.println("6.Erin's Queries Soon to Be Issue Num 20-35");
             System.out.println("7.Exit APP");
-//  number 1 which is display available queries is basically a dynamic switch case within a static one allowing me to modify its length at any time without having to go and change the numbers over and over like a static one would.
+//  number 1, which is display available queries is basically a dynamic switch case within a static one allowing me to modify its length at any time without having to go and change the numbers over and over like a static one would.
 // it mostly relies on the for loop as long as the input is bigger than i but smaller than the predefined list it will increment I and execute the query in the list
 // then there is the if statement saying is the index which == predefined queries is smaller than 0 which = I then the choice isn't valid which is an error detection and handling method.
-//  it also invalidates the users choice if it turns out to be bigger than the specified index
+//  it also invalidates the user's choice if it turns out to be bigger than the specified index
             try {
                 query = sc.nextInt();
 
@@ -197,7 +197,7 @@ public class Queries {
         System.out.println("3.Selects the most popular Cities in a District, Issue Number 13...");
         System.out.println("4.All the cities in a country from the largest population to smallest in this case its france, Issue Number 12...");
         System.out.println("5.All the cities in a region organised by the largest population to the smallest, Issue Number 11.. ");
-
+        System.out.println("6.Information (the number of people who speak certain languages from the greatest number to smallest, including the percentage of the world population) that the company wants");
 
     }
 
