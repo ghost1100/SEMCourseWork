@@ -39,11 +39,11 @@ public class Queries {
             System.out.println("Welcome to Napier Sem Course Application");
             System.out.println("Enter Number For Desired Query");
             System.out.println("1.Display Available Queries Ranging from to #29, #11, #12, #10, #9, #13 ");
-            System.out.println("2.Create Your Own City Queries");
-            System.out.println("3.Create Your Own Country Queries");
-            System.out.println("4.Rachel's Queries");
-            System.out.println("5.Robbie's Queries");
-            System.out.println("6.Erin's Queries Soon to Be Issue Num 20-35");
+            System.out.println("2.Create Your Own City Queries");// extra might remove later
+            System.out.println("3.Create Your Own Country Queries");// extra might remove later
+            System.out.println("4.Rachel's Queries");// please remove the name when done and number them.
+            System.out.println("5.Robbie's Queries");// please remove the name when done and number them.
+            System.out.println("6.Erin's Queries Soon to Be Issue Num 20-35");// please remove the name when done and number them.
             System.out.println("7.Exit APP");
 //  number 1, which is display available queries is basically a dynamic switch case within a static one allowing me to modify its length at any time without having to go and change the numbers over and over like a static one would.
 // it mostly relies on the for loop as long as the input is bigger than i but smaller than the predefined list it will increment I and execute the query in the list
