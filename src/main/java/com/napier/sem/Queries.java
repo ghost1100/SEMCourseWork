@@ -43,7 +43,6 @@ public class Queries {
             System.out.println("2.Rachel's Queries");// please remove the name when done and number them.
             System.out.println("3.Robbie's Queries");// please remove the name when done and number them.
             System.out.println("4.Erin's Queries Soon to Be Issue Num 20-35");// please remove the name
-            // when done and number them.
             System.out.println("5.Exit APP");
 //  number 1, which is display available queries is basically a dynamic switch case within a static one allowing me to modify its length at any time without having to go and change the numbers over and over like a static one would.
 // it mostly relies on the for loop as long as the input is bigger than i but smaller than the predefined list it will increment I and execute the query in the list
