@@ -1,5 +1,6 @@
 package com.napier.sem;
 import java.sql.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AdditionalQueries {
@@ -10,11 +11,39 @@ public class AdditionalQueries {
 
     public static void DisplayAdditionalQueries(){
         System.out.println("Additional Queries available to user");
-        System.out.println("1. Search based on city name");
-        System.out.println("1. Search based on country name");
-
-        CreateCityQueries();
+        System.out.println("1.(City Report) Search based on city name");
+        System.out.println("2.(Country Report) Search based on country name");
+        Runquery();
     }
+
+    public static void Runquery(){
+        Scanner input = new Scanner(System.in);
+        int choice = input.nextInt();
+        input.nextLine();
+        switch (choice){
+            case 1:
+                CreateCityQueries();
+                DisplayAdditionalQueries();
+                break;
+                case 2:
+                    DisplayAdditionalQueries();
+                    break;
+                    default:
+                        System.out.println("Please enter a valid choice");
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
     private static void CreateCityQueries() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter City Name : ");
