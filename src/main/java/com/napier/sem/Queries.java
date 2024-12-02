@@ -83,7 +83,7 @@ public class Queries {
                             choice();
                         }
                         if (Num == 6) {
-                            //Statement21();
+                            Statement21();
                             choice();
                         }
                         if (Num == 5) {
@@ -724,34 +724,33 @@ public class Queries {
     //End of populated cities in a continent
 
     //The top N populated capital cities in a region where N is provided by the user
-    ///public static void Statement21() throws SQLException {
-    /////open database
-    ///try (Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(), DatabaseConfig.username(), DatabaseConfig.password())) {
-    ///Statement stmt = con.createStatement();
-    ///Scanner scanner = new Scanner(System.in);
-    /////get N from user
-    ///System.out.print("Enter N: ");
-    ///int n = Integer.parseInt(scanner.nextLine());
-    /////implement SQL query
-    ///String Query = "SELECT Capital, Population FROM country GROUP BY Region ORDER BY Population DESC";
-    ///ResultSet rs = stmt.executeQuery(Query);
-    /////initialize count
-    ///int count = 0;
-    /////loop top N populated countries
-    ///while (rs.next()) {
-    ///String Capital = rs.getString("Capital");
-    ///int population = rs.getInt("Population");
-    ///String Region = rs.getString("Region");
-    ///System.out.println("Region: " + Region + ", " + "Capital: " + Capital + ", " + "Population: " + population);
-    ///count++;
-    /////if the count is greater than n then the loop ends
-    ///if (count >= n) {
-    ///break;
-    ///}
-    ///}
-    /////error message
-    ///} catch (SQLException e) {
-    ///System.out.println("Error: " + e.getMessage());
-    ///}
-    ///}
-    }
+    public static void Statement21() throws SQLException {
+        //open database
+        try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
+            Statement stmt = con.createStatement();
+            Scanner scanner = new Scanner(System.in);
+            //get N from user
+            System.out.print("Enter N: ");
+            int n = Integer.parseInt(scanner.nextLine());
+            //implement SQL query
+            String Query = "SELECT country.Region, city.Name, city.Population FROM city, country JOIN city ON country.Capital = city.ID  ORDER BY city.Population DESC;";
+            ResultSet rs = stmt.executeQuery(Query);
+            //initialize count
+            int count = 0;
+            //loop top N populated countries
+            while (rs.next()) {
+String Region = rs.getString("Region");
+                String Capital = rs.getString("Capital");
+                int population = rs.getInt("Population");
+                System.out.println("Region: "+ Region +", " + "Capital: " + Capital + ", " + "Population: " + population);
+                count++;
+                //if the count is greater than n then the loop ends
+                if (count >= n) {
+                    break;
+                }
+            }
+            //error message
+        } catch(SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }}
