@@ -1,6 +1,5 @@
 package com.napier.sem;
 import java.sql.*;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class AdditionalQueries {
@@ -22,10 +21,11 @@ public class AdditionalQueries {
         input.nextLine();
         switch (choice){
             case 1:
-                CreateCityQueries();
+                CityQueries();
                 DisplayAdditionalQueries();
                 break;
                 case 2:
+                    CountryQueries();
                     DisplayAdditionalQueries();
                     break;
                     default:
@@ -37,6 +37,31 @@ public class AdditionalQueries {
 
 
 
+public static void CountryQueries(){
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Enter Country Name : ");
+    String Name = sc.nextLine();
+
+    String query = "";
+    // Database connection and execution
+    try (Connection Con = DriverManager.getConnection(DatabaseConfig.jdbcurl(), DatabaseConfig.username(), DatabaseConfig.password());
+         PreparedStatement pstmt = Con.prepareStatement(query)) {
+        pstmt.setString(1, "%" + Name + "%");
+        // Execute query
+        ResultSet rs = pstmt.executeQuery();
+        // Process results
+        while (rs.next()) {
+            System.out.println("Name: " + rs.getString("CityName"));
+            System.out.println("Continent: " + rs.getString("Continent"));
+            System.out.println("Region : " + rs.getString("Region"));
+            System.out.println("Population: " + rs.getInt("Population"));
+            System.out.println("Capital: " + rs.getInt("Capital"));
+            System.out.println("/ :)----------------------------------------------------:/");
+        }
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+}
 
 
 
@@ -44,7 +69,8 @@ public class AdditionalQueries {
 
 
 
-    private static void CreateCityQueries() {
+
+    private static void CityQueries() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter City Name : ");
         String Name = sc.nextLine();
@@ -67,7 +93,6 @@ public class AdditionalQueries {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
+    }}
 
 
-}
