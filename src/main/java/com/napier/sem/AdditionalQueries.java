@@ -22,10 +22,10 @@ public class AdditionalQueries {
         System.out.println("Additional Queries available to user");
         System.out.println("1.(City Report) Search based on city name");
         System.out.println("2.(Country Report) Search based on country name");
-        Runquery();
+        Run_query();
     }
 
-    public static void Runquery(){
+    public static void Run_query(){
         Scanner sc = new Scanner(System.in);
         int choice = sc.nextInt();
         sc.nextLine();
@@ -102,4 +102,9 @@ public static void CountryQueries(){
         }
     }}
 
+/// note to future developers the main class sends the user automatically
+/// to display queries which you must modify
+///to add a new print statement to allow the end user to see what's available to them.
+/// then it's the run query function which displays the switch case automatically taking in the user's input without prompting them again, each case has a different function in it, and the functions are what's responsible for running the query taking in any additional input and sending output, another function which is inside the switch case is display additional queries which turns this application into a loop.
+/// then there is the last case that would be to exist the application.
 
