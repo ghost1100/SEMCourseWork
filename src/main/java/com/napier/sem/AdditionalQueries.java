@@ -22,6 +22,8 @@ public class AdditionalQueries {
         System.out.println("Additional Queries available to user");
         System.out.println("1.(City Report) Search based on city name");
         System.out.println("2.(Country Report) Search based on country name");
+        System.out.println("3. Exit Application ");
+
         Run_query();
     }
 
@@ -38,6 +40,16 @@ public class AdditionalQueries {
                     CountryQueries();
                     DisplayAdditionalQueries();
                     break;
+            case 3:
+                try {
+                    System.out.println("Exiting Additional Queries");
+                    Thread.sleep(2000);
+                    System.out.println("Goodbye :)");
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                System.exit(0);
+                break;
                     default:
                         System.out.println("Please enter a valid choice");
                         break;
