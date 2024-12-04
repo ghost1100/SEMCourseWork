@@ -157,10 +157,16 @@ public class Queries {
                             choice();
 
                         }
+                        if (Num2 == 7){
+                            Statement27();
+                            choice();
+                        }
+
                         else {
                             System.out.println("Please enter a valid number");
                             choice();
                         }
+
 
                     case 4:
                         System.out.println("please choose which query you'd like to run");
@@ -562,34 +568,63 @@ public class Queries {
 
 
     }
-    public static void Statement25() throws SQLException {
 
-
+    public static void Statement25() {
+        // Connect to database
         try (Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(), DatabaseConfig.username(), DatabaseConfig.password())) {
-            Scanner scanner = new Scanner(System.in);
-            {
-                String query = "SELECT c.continent, " +
-                        "COUNT(DISTINCT c.country_code) AS total_countries, " +
-                        "SUM(c.population) AS total_population, " +
-                        "SUM(CASE WHEN ci.city_id IS NOT NULL THEN ci.population ELSE 0 END) AS city_population, " +
-                        "SUM(CASE WHEN ci.city_id IS NULL THEN c.population ELSE 0 END) AS non_city_population " +
-                        "FROM country c " +
-                        "LEFT JOIN city ci ON c.country_code = ci.country_code " +
-                        "GROUP BY c.continent";
+            Statement stmt = con.createStatement();
 
+            // Implement SQL query
+            String Query ="SELECT country.continent, SUM(country.Population) AS TotalPopulation, SUM(city.Population) AS CityPopulation, SUM(country.Population) - SUM(city.Population) AS NonCityPopulation FROM country LEFT JOIN city ON country.Code = city.CountryCode GROUP BY country.continent ORDER BY country.continent;";
+            ResultSet rs = stmt.executeQuery(Query);
+            // Display population details for each continent
+            while (rs.next()) {
+                String continent = rs.getString("continent");
+                long totalPopulation = rs.getLong("TotalPopulation");
+                long cityPopulation = rs.getLong("CityPopulation");
+                long nonCityPopulation = rs.getLong("NonCityPopulation");
 
-
-
-
-
-
-
+                System.out.println("continent: " + continent);
+                System.out.println("  Total Population: " + totalPopulation);
+                System.out.println("  Population in Cities: " + cityPopulation);
+                System.out.println("  Population not in Cities: " + nonCityPopulation);
+                System.out.println();
             }
-
-
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
         }
-
     }
+
+
+
+
+
+    public static void Statement27() {
+        // Connect to database
+        try (Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(), DatabaseConfig.username(), DatabaseConfig.password())) {
+            Statement stmt = con.createStatement();
+
+            // Implement SQL query
+            String Query ="SELECT country.name, SUM(country.Population) AS TotalPopulation, SUM(city.Population) AS CityPopulation, SUM(country.Population) - SUM(city.Population) AS NonCityPopulation FROM country LEFT JOIN city ON country.Code = city.CountryCode GROUP BY country.name ORDER BY country.name;";
+            ResultSet rs = stmt.executeQuery(Query);
+            // Display population details for each country
+            while (rs.next()) {
+                String name = rs.getString("name");
+                int totalPopulation = rs.getInt("TotalPopulation");
+                int cityPopulation = rs.getInt("CityPopulation");
+                int nonCityPopulation = rs.getInt("NonCityPopulation");
+
+                System.out.println("country: " + name);
+                System.out.println("  Total Population: " + totalPopulation);
+                System.out.println("  Population in Cities: " + cityPopulation);
+                System.out.println("  Population not in Cities: " + nonCityPopulation);
+                System.out.println();
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
 
 
 
