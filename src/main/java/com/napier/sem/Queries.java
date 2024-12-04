@@ -733,7 +733,7 @@ public class Queries {
             System.out.print("Enter N: ");
             int n = Integer.parseInt(scanner.nextLine());
             //implement SQL query
-            String Query = "SELECT country.Region, city.Name, city.Population FROM city, country JOIN city ON country.Capital = city.ID  ORDER BY city.Population DESC;";
+            String Query = "SELECT city.Name, country.Region, country.Capital, city.Name, city.Population FROM city, country Inner JOIN world.city c on country.Code = c.CountryCode;";
             ResultSet rs = stmt.executeQuery(Query);
             //initialize count
             int count = 0;
@@ -742,7 +742,9 @@ public class Queries {
 String Region = rs.getString("Region");
                 String Capital = rs.getString("Capital");
                 int population = rs.getInt("Population");
-                System.out.println("Region: "+ Region +", " + "Capital: " + Capital + ", " + "Population: " + population);
+                String CityName = rs.getString("Name");
+                System.out.println("City Name: "+ CityName +"Region: "+ Region +", " + "Capital: " + Capital + ", " + "Population: " + population);
+                System.out.println("-----------------------------");
                 count++;
                 //if the count is greater than n then the loop ends
                 if (count >= n) {
