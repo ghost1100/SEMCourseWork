@@ -182,10 +182,32 @@ public static void CountryQueries(){
             throw new RuntimeException(e);
         }
     }
-// The total population of the continent/region/country living in cities (including a %)
+//The total population of the continent/region/country living in cities (including a %)
+    // we need to add City population plus percentage, country population plus percentage,
+    // region population plus percentage, continent population plus percentage.
 public static void Population3(){
         Scanner sc = new Scanner(System.in);
-
+    System.out.println("Enter City Name: ");
+    String Name = sc.nextLine();
+    String query = " SELECT city.Name AS CityName, country.Name AS Country, city.District, city.Population FROM city LEFT JOIN country ON city.CountryCode = country.Code WHERE city.Name LIKE ?;";
+    // Database connection and execution
+    try (Connection Con = DriverManager.getConnection(DatabaseConfig.jdbcurl(), DatabaseConfig.username(), DatabaseConfig.password());
+         PreparedStatement pstmt = Con.prepareStatement(query)) {
+        pstmt.setString(1, "%" + Name + "%");
+        // Execute query
+        ResultSet rs = pstmt.executeQuery();
+        // Process results
+        while (rs.next()) {
+            System.out.println("Name: " + rs.getString("CityName"));
+            System.out.println("Country: " + rs.getString("Country"));
+            System.out.println("District: " + rs.getString("District"));
+            System.out.println("Population: " + rs.getInt("Population"));
+            System.out.println("/ :)----------------------------------------------------:/");
+            // added a nice looking spacer.
+        }
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
 }
 //The total population of the continent/region/country not living in cities (including a %).
     public static void Population4(){
