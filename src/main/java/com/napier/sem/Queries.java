@@ -127,6 +127,9 @@ public class Queries {
                         System.out.println("The top N populated capital cities in the world where N is provided by the user # 22");
                         System.out.println("All the capital cities in a continent organised by largest population to smallest #20");
                         System.out.println("The top N populated capital cities in a continent where N is provided by the user # 23");
+                        System.out.println("The population of people, people living in cities, and people not living in cities in each continent #25");
+                        System.out.println("The population of people, people living in cities, and people not living in cities in each country#27");
+                        System.out.println("Information (populations) the organisation wants accessible to #28");
 
                         int Num2 = sc.nextInt();
                         if (Num2 == 5) {
@@ -148,6 +151,11 @@ public class Queries {
                         if (Num2 == 1) {
                             Statement6();//Works as expected!
                             choice();
+                        }
+                        if (Num2 == 6) {
+                            Statement25();
+                            choice();
+
                         }
                         else {
                             System.out.println("Please enter a valid number");
@@ -543,9 +551,48 @@ public class Queries {
                 }catch(SQLException e) {
                     System.out.println("Error!! take a break!: " + e.getMessage());
                 }
+
+
             }
+
+
         }
+
+
+
+
     }
+    public static void Statement25() throws SQLException {
+
+
+        try (Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(), DatabaseConfig.username(), DatabaseConfig.password())) {
+            Scanner scanner = new Scanner(System.in);
+            {
+                String query = "SELECT c.continent, " +
+                        "COUNT(DISTINCT c.country_code) AS total_countries, " +
+                        "SUM(c.population) AS total_population, " +
+                        "SUM(CASE WHEN ci.city_id IS NOT NULL THEN ci.population ELSE 0 END) AS city_population, " +
+                        "SUM(CASE WHEN ci.city_id IS NULL THEN c.population ELSE 0 END) AS non_city_population " +
+                        "FROM country c " +
+                        "LEFT JOIN city ci ON c.country_code = ci.country_code " +
+                        "GROUP BY c.continent";
+
+
+
+
+
+
+
+
+            }
+
+
+        }
+
+    }
+
+
+
     ///Start of Erin's work (It's an attempt, we don't need to talk about why it's not working just yet, note that the //* are the acc lines of code) I noticed and Honestly, great Idea.
     //The top N populated cities in a region where N is provided by the user ///*What's Missing here is the Issue Number!!
     public static void Statement16() throws SQLException {
