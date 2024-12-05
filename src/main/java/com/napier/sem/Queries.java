@@ -129,7 +129,7 @@ public class Queries {
                         System.out.println("The top N populated capital cities in a continent where N is provided by the user # 23");
                         System.out.println("The population of people, people living in cities, and people not living in cities in each continent #25");
                         System.out.println("The population of people, people living in cities, and people not living in cities in each country#27");
-                        System.out.println("Information (populations) the organisation wants accessible to #28");
+
 
                         int Num2 = sc.nextInt();
                         if (Num2 == 5) {
@@ -161,6 +161,7 @@ public class Queries {
                             Statement27();
                             choice();
                         }
+
 
                         else {
                             System.out.println("Please enter a valid number");
@@ -624,6 +625,10 @@ public class Queries {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
+
+
+
 
 
 
