@@ -611,9 +611,9 @@ public class Queries {
             // Display population details for each country
             while (rs.next()) {
                 String name = rs.getString("name");
-                int totalPopulation = rs.getInt("TotalPopulation");
-                int cityPopulation = rs.getInt("CityPopulation");
-                int nonCityPopulation = rs.getInt("NonCityPopulation");
+                long totalPopulation = rs.getLong("TotalPopulation");
+                long cityPopulation = rs.getLong("CityPopulation");
+                long nonCityPopulation = rs.getLong("NonCityPopulation");
 
                 System.out.println("country: " + name);
                 System.out.println("  Total Population: " + totalPopulation);
