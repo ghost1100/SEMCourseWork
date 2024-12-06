@@ -23,7 +23,8 @@ public class AdditionalQueries {
         System.out.println("1.(City Report) Search based on city name");
         System.out.println("2.(Country Report) Search based on country name");
         System.out.println("3.(Population Report) Search population based on user input");
-        System.out.println("4. Exit Application ");
+        System.out.println("4.(Population Report) Search population based on user input");
+        System.out.println("5. Exit Application ");
 
         Run_query();
     }
@@ -45,8 +46,11 @@ public class AdditionalQueries {
                 Population_Query();
                 DisplayAdditionalQueries();
                 break;
-
             case 4:
+                Language_query();
+                DisplayAdditionalQueries();
+                break;
+            case 5:
                 try {
                     System.out.println("Exiting Additional Queries");
                     Thread.sleep(2000);
@@ -99,6 +103,69 @@ public class AdditionalQueries {
         }
     }
 
+/*
+Finally, the organization has asked if it is possible to provide the number of people who speak
+ the following languages from the greatest number to smallest, including the
+percentage of the world population:
+&bull; Chinese.
+&bull; English.
+&bull; Hindi.
+&bull; Spanish.
+&bull; Arabic.
+*/
+public  static void Language_query(){
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Enter the Language Name: ");
+    String language = sc.nextLine();
+    String query = """
+            SELECT\s
+                        c.Name AS CountryName,
+                        c.Population AS CountryPopulation,
+                        cl.Percentage AS LanguagePercentage,
+                        (SUM(c.Population * cl.Percentage / 100) OVER () / (SELECT SUM(Population) FROM country) * 100) AS WorldPercentage
+                    FROM\s
+                        country c
+                    JOIN\s
+                        countrylanguage cl ON c.Code = cl.CountryCode
+                    WHERE\s
+                        cl.Language = ?
+                    ORDER BY\s
+                        c.Population DESC;
+            """;
+
+    try (Connection Con = DriverManager.getConnection(DatabaseConfig.jdbcurl(), DatabaseConfig.username(), DatabaseConfig.password());
+         PreparedStatement pstmt = Con.prepareStatement(query)) {
+        pstmt.setString(1,language);
+        ResultSet rs = pstmt.executeQuery();
+
+        // Process results
+        System.out.println("--------------------------------------------------------------------------");
+        System.out.printf("%-30s %-15s %-10s %-10s%n",
+                "|Country Name|", "|Population|", "|Language %|", "|World %|");
+        System.out.println("--------------------------------------------------------------------------");
+
+        boolean hasResults = false;// starting at false
+        while (rs.next()) {
+            hasResults = true;// but when it's true and while it's true proceeds with the following.
+            //using the F string instead of LN to format the structure of the string it's self.
+            System.out.printf("%-30s %-15d %-10.1f %-10.2f%n",//this line is a java formatting section
+                    // that can only be used with the printf statement
+                    rs.getString("CountryName"),
+                    rs.getInt("CountryPopulation"),
+                    rs.getDouble("LanguagePercentage"),
+                    rs.getDouble("WorldPercentage"));
+
+        }
+        /* if it has result remains false, this message appears. */
+        if (!hasResults) {
+            System.out.println("No information found for this language, please try again later.");
+
+        // if a database connection error or anything else comes up, this runtime error appears.
+        }
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+}
 
     // Country query responsible for generating a report with the Country name, Continent,
     // Region, population and the Capital of the country that will be provided by the user.
@@ -132,6 +199,7 @@ public class AdditionalQueries {
     // City query responsible for generating a report with the city name, country,
 // District and population of the city name that will be provided by the user
     private static void CityQueries() {
+        //noinspection Duplicates
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter City Name: ");
         String Name = sc.nextLine();
@@ -186,6 +254,7 @@ public class AdditionalQueries {
     // region population plus percentage, continent population plus percentage.
 
     public static void Population3() {
+        //noinspection Duplicates
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter City Name: ");
         String Name = sc.nextLine();
@@ -240,7 +309,7 @@ public class AdditionalQueries {
 
 
 
-                // Calculate percentage of people not living in cities
+                // Calculate the percentage of people not living in cities
                 double percentageNonCityPopulation = totalPopulation > 0 ? (double) nonCityPopulation / totalPopulation * 100 : 0;
 
                 System.out.println("Country: " + countryName);
