@@ -23,7 +23,7 @@ public class AdditionalQueries {
         System.out.println("1.(City Report) Search based on city name");
         System.out.println("2.(Country Report) Search based on country name");
         System.out.println("3.(Population Report) Search population based on user input");
-        System.out.println("4.(Population Report) Search population based on user input");
+        System.out.println("4.(Language Report) Search Percentage of speakers and countries based on language input");
         System.out.println("5. Exit Application ");
 
         Run_query();
