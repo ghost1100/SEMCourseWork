@@ -4,7 +4,8 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 /**
- * this class will be used to create an array of some sorts (will figure that out later...) to store Predetermined Queries and a switch statement to display a dew options to the user.
+ * this class will be used to create an array of some sorts (will figure that out later...)
+ * to store Predetermined Queries and a switch statement to display a new options to the user.
  * one of the options would be to display the pre-made queries, and the other option would be used to exit the app.
  * if the user chooses option one, it presents them with the queries and, they can choose which one to run.
  * might try to implement parameterised queries...
@@ -13,7 +14,7 @@ import java.util.InputMismatchException;
  * the third format is just this that should be on-top of every method or class.
  */
 public class Queries {
-
+    //creates a list of strings named predefined queries.
     public static final String[] PREDEFINED_QUERIES = {
             ///this is where the queries would go.
             //Ahmed.
@@ -39,12 +40,10 @@ public class Queries {
             System.out.println("Welcome to Napier Sem Course Application");
             System.out.println("Enter Number For Desired Query");
             System.out.println("1.Display Available Queries Ranging from to #29, #11, #12, #10, #9, #13 ");
-            System.out.println("2.Create Your Own City Queries");// extra might remove later
-            System.out.println("3.Create Your Own Country Queries");// extra might remove later
-            System.out.println("4.Rachel's Queries");// please remove the name when done and number them.
-            System.out.println("5.Robbie's Queries");// please remove the name when done and number them.
-            System.out.println("6.Erin's Queries Soon to Be Issue Num 20-35");// please remove the name when done and number them.
-            System.out.println("7.Exit APP");
+            System.out.println("2.Rachel's Queries");// please remove the name when done and number them.
+            System.out.println("3.Robbie's Queries");// please remove the name when done and number them.
+            System.out.println("4.Erin's Queries Soon to Be Issue Num 20-35");// please remove the name
+            System.out.println("5.Exit APP");
 //  number 1, which is display available queries is basically a dynamic switch case within a static one allowing me to modify its length at any time without having to go and change the numbers over and over like a static one would.
 // it mostly relies on the for loop as long as the input is bigger than i but smaller than the predefined list it will increment I and execute the query in the list
 // then there is the if statement saying is the index which == predefined queries is smaller than 0 which = I then the choice isn't valid which is an error detection and handling method.
@@ -54,28 +53,39 @@ public class Queries {
 
                 switch (query) {
                     case 1:
+                        //displays available queries.
+                        //returns the user's input
+                        //executes the query from the list -1 because the index starts at 0 however,
+                        // 0 is not a valid choice, so an error will show up.
                         displayQueries();
                         int querychoice = sc.nextInt();
                         executeQuery(querychoice - 1);
                         break;
                     case 2:
-                        System.out.println("Create your own City query");
-                        // allows the user the option to choose a city name and, it will list out the city's details I plan to build up on this by using the SQL join method to display the language and other similar details; however, the current time frame doesn't allow for that.
-                        CreateCityQueries();
-                        break;
-                    case 3:
-                        System.out.println("Create your own query");
-                        CreateQueries();
-                        break;
-                    case 4:
+                        // the structure of this is different since some of these will ask for the user's input,
+                        // ideally the ones that don't require
+                        // an input should be placed above with the predefined queries
+                        //displays the available choices to the user,
+                        //if the user's number matches what we have available, the function is run,
+                        //but it relies on an if statement to parse through the user's input.
                         System.out.println("please choose which query you'd like to run");
                         System.out.println("1. All the countries in the world organised by largest population to smallest report #19");
                         System.out.println("2. All the countries in a continent organised by largest population to smallest report #20");
                         System.out.println("3.All the countries in a region organised by largest population to smallest report #21");
                         System.out.println("4.The top N populated countries in a continent where N is provided by the user #23");
                         System.out.println("5.The top N populated countries in the world where N is provided by the user #22 ");
-
+                        System.out.println("6.The top N populated capital cities in a region where N is provided by the user missing issue number and the sql query is wrong");
+                        System.out.println("7. The population of people, people living in cities, and people not living in cities in each region missing issue number");
                         int Num = sc.nextInt();
+                        //passes in the number from the user.
+                        if (Num == 7) {
+                            Statement22();
+                            choice();
+                        }
+                        if (Num == 6) {
+                            Statement21();
+                            choice();
+                        }
                         if (Num == 5) {
                             Statement5();
                             choice();
@@ -96,14 +106,20 @@ public class Queries {
                             Statement1();
                             choice();
                         }
+                        //if number is unavailable an error appears.
                         else {
                             System.out.println("Please enter a valid number");
                             choice();
                         }
                         break;
-                    case 5: ///I choose the easiest way to include all the code by just having if statements inside the switch case so its static instead of dynamic
-                        // Robbie, please edit the "" Statements later to display what the number of the issue is alongside what it does.
-                        // like this: the N of City in the Country Where user provides \N, Issue #15
+                    case 3:
+                        //I choose the easiest way,
+                        //to include all the code
+                        // by just having if statements inside the switch case so its static instead of dynamic
+                        // Robbie, please edit the ""
+                        // Statements later to display what the number of the issue is alongside what it does.
+                        //like this: the N of City in the Country Where user provides \N, Issue #15
+
                         System.out.println("please choose which query you'd like to run");
                         //Please change these to what the query does then add the issue number at the end.
                         System.out.println("All the capital cities in the world organised by largest population to smallest #19");
@@ -111,6 +127,9 @@ public class Queries {
                         System.out.println("The top N populated capital cities in the world where N is provided by the user # 22");
                         System.out.println("All the capital cities in a continent organised by largest population to smallest #20");
                         System.out.println("The top N populated capital cities in a continent where N is provided by the user # 23");
+                        System.out.println("The population of people, people living in cities, and people not living in cities in each continent #25");
+                        System.out.println("The population of people, people living in cities, and people not living in cities in each country#27");
+
 
                         int Num2 = sc.nextInt();
                         if (Num2 == 5) {
@@ -133,12 +152,24 @@ public class Queries {
                             Statement6();//Works as expected!
                             choice();
                         }
+                        if (Num2 == 6) {
+                            Statement25();
+                            choice();
+
+                        }
+                        if (Num2 == 7){
+                            Statement27();
+                            choice();
+                        }
+
+
                         else {
                             System.out.println("Please enter a valid number");
                             choice();
                         }
 
-                    case 6:
+
+                    case 4:
                         System.out.println("please choose which query you'd like to run");
                         System.out.println("1. The top N populated cities in a region where N is provided by the user.    ///*What's Missing here is the Issue Number!!");
                         System.out.println("2. The top N populated cities in the world where N is provided by the user.   (!Issue Number)");
@@ -173,7 +204,7 @@ public class Queries {
 
 
                         break;
-                    case 7:
+                    case 5:
                         System.out.println("exiting the application");
                         break;
 
@@ -186,7 +217,7 @@ public class Queries {
 ///added some error management feature using the catch statement.
 /// could add another statement later to allow the user to add their own inputs to customize their own query, for example, the ones where the user enters the number of population or language itself...
             }
-        } while (query != 4);///ensures that the app doesn't close unless user asks it to do so.
+        } while (query != 5);///ensures that the app doesn't close unless user asks it to do so.
         sc.close();
     }
 
@@ -200,9 +231,11 @@ public class Queries {
         System.out.println("6.Information (the number of people who speak certain languages from the greatest number to smallest, including the percentage of the world population) that the company wants Issue number 29");
 
     }
-
+    // a function to execute the queries based on selected index by user.
     private static void executeQuery(int index) {
         if (index < 0 || index >= PREDEFINED_QUERIES.length) {
+            ///if the number selected by user is smaller than or bigger than the number of queries we have available,
+            ///an error message appears
             System.out.println("Invalid Query");
             return;
         }
@@ -211,103 +244,38 @@ public class Queries {
             ResultSet rs = stmt.executeQuery(PREDEFINED_QUERIES[index]);
             while (rs.next()) {
                 System.out.println(rs.getString(1) + ", " + rs.getString(2));
-
             }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-
-
-        }
-
-    }
-
-    private static void CreateCityQueries() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter City Name");
-        String Name = sc.nextLine();
-        String query = "SELECT ID, Name, CountryCode, District, Population FROM city WHERE Name LIKE ?";// the ? is used as a place-holder to mark where the scanner input will be placed
-//database information
-
-        //try the method used to link database information with the driver manager.
-        try (Connection Con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password());
-             PreparedStatement pstmt = Con.prepareStatement(query)) {
-            // this is saying the prepared statement is equal to the query plus the user's input which relies on the scanner object
-            pstmt.setString(1, "%" + Name + "%");// the % is used for a pattern matching the pattern used here is name as long as the letters match it shouldn't be concerned if the name is in upper or lower case.
-//the parameter index is one meaning this is the one and only input we will accept from the user at the moment we can tinker about with that later to add more features when the join elements are implemented.
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                System.out.println(rs.getString(1) + " ID" + ", " + rs.getString(2) + " Name" + ", " + rs.getString(3) + " CountryCode" + ", " + rs.getString(4) + " District" + ", " + rs.getString(5) + " Population");
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-
-    }
-    ///the one am working on right now... it should basically allow the user to create all the other missing queries...
-    private static void CreateQueries() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter District Name");
-        String DistrictName = sc.nextLine();
-        String query = "SELECT country.Name AS CountryName, country.Code AS CountryCode, country.Continent, country.Region, country.SurfaceArea, country.IndepYear, country.Population AS CountryPopulation, city.Name AS CityName, city.District, city.Population AS CityPopulation, countrylanguage.Language, countrylanguage.Isofficial, countrylanguage.Percentage FROM country INNER JOIN city ON country.Code = city.CountryCode INNER JOIN countrylanguage ON country.Code = countrylanguage.CountryCode WHERE city.Name LIKE ?";
-        /// used inner join to combine the three tables and look up countries based on the district name
-
-        try (Connection Con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password());
-             PreparedStatement pstmt = Con.prepareStatement(query)) {
-            pstmt.setString(1, "%" + DistrictName + "%");
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                ResultSetMetaData rsmd = rs.getMetaData();
-                int columnCount = rsmd.getColumnCount();
-                for (int i = 1; i <= columnCount; i++) {
-                    System.out.print(rsmd.getColumnName(i) + ": " + rs.getString(i) + (i < columnCount  ? ", " : ""));
-                }
-                System.out.println();
-
-            }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    /**(//The top N populated capital cities in a region where N is provided by the user
-    public static void Statement21() throws SQLException {
-        //open database
-        try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
+    //The population of people, people living in cities, and people not living in cities in each region
+    private static void Statement22() {
+        // Connect to database
+        try (Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(), DatabaseConfig.username(), DatabaseConfig.password())) {
             Statement stmt = con.createStatement();
-            Scanner scanner = new Scanner(System.in);
-            //get N from user
-            System.out.print("Enter N: ");
-            int n = Integer.parseInt(scanner.nextLine());
-            //implement SQL query
-            String Query = "SELECT Capital, Population FROM country GROUP BY Region ORDER BY Population DESC";
+
+            // Implement SQL query
+            String Query ="SELECT country.Region, SUM(country.Population) AS TotalPopulation, SUM(city.Population) AS CityPopulation, SUM(country.Population) - SUM(city.Population) AS NonCityPopulation FROM country LEFT JOIN city ON country.Code = city.CountryCode GROUP BY country.Region ORDER BY country.Region;";
             ResultSet rs = stmt.executeQuery(Query);
-            //initialise count
-            int count = 0;
-            //loop top N populated countries
+            // Display population details for each region
             while (rs.next()) {
-                String Capital = rs.getString("Capital");
-                int population = rs.getInt("Population");
-                String Region = rs.getString("Region");
-                System.out.println("Region: "+ Region +", " + "Capital: " + Capital + ", " + "Population: " + population);
-                count++;
-                //if count is greater than n then the loop ends
-                if (count >= n) {
-                    break;
-                }
+                String region = rs.getString("Region");
+                int totalPopulation = rs.getInt("TotalPopulation");
+                int cityPopulation = rs.getInt("CityPopulation");
+                int nonCityPopulation = rs.getInt("NonCityPopulation");
+
+                System.out.println("Region: " + region);
+                System.out.println("  Total Population: " + totalPopulation);
+                System.out.println("  Population in Cities: " + cityPopulation);
+                System.out.println("  Population not in Cities: " + nonCityPopulation);
+                System.out.println();
             }
-            //error message
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
-     */
-
-
-
     //The top N populated countries in the world where N is provided by the user #22
     public static void Statement5() throws SQLException {
         //open database
@@ -590,9 +558,81 @@ public class Queries {
                 }catch(SQLException e) {
                     System.out.println("Error!! take a break!: " + e.getMessage());
                 }
+
+
             }
+
+
         }
-       }
+
+
+
+
+    }
+
+    public static void Statement25() {
+        // Connect to database
+        try (Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(), DatabaseConfig.username(), DatabaseConfig.password())) {
+            Statement stmt = con.createStatement();
+
+            // Implement SQL query
+            String Query ="SELECT country.continent, SUM(country.Population) AS TotalPopulation, SUM(city.Population) AS CityPopulation, SUM(country.Population) - SUM(city.Population) AS NonCityPopulation FROM country LEFT JOIN city ON country.Code = city.CountryCode GROUP BY country.continent ORDER BY country.continent;";
+            ResultSet rs = stmt.executeQuery(Query);
+            // Display population details for each continent
+            while (rs.next()) {
+                String continent = rs.getString("continent");
+                long totalPopulation = rs.getLong("TotalPopulation");
+                long cityPopulation = rs.getLong("CityPopulation");
+                long nonCityPopulation = rs.getLong("NonCityPopulation");
+
+                System.out.println("continent: " + continent);
+                System.out.println("  Total Population: " + totalPopulation);
+                System.out.println("  Population in Cities: " + cityPopulation);
+                System.out.println("  Population not in Cities: " + nonCityPopulation);
+                System.out.println();
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+
+
+
+
+    public static void Statement27() {
+        // Connect to database
+        try (Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(), DatabaseConfig.username(), DatabaseConfig.password())) {
+            Statement stmt = con.createStatement();
+
+            // Implement SQL query
+            String Query ="SELECT country.name, SUM(country.Population) AS TotalPopulation, SUM(city.Population) AS CityPopulation, SUM(country.Population) - SUM(city.Population) AS NonCityPopulation FROM country LEFT JOIN city ON country.Code = city.CountryCode GROUP BY country.name ORDER BY country.name;";
+            ResultSet rs = stmt.executeQuery(Query);
+            // Display population details for each country
+            while (rs.next()) {
+                String name = rs.getString("name");
+                int totalPopulation = rs.getInt("TotalPopulation");
+                int cityPopulation = rs.getInt("CityPopulation");
+                int nonCityPopulation = rs.getInt("NonCityPopulation");
+
+                System.out.println("country: " + name);
+                System.out.println("  Total Population: " + totalPopulation);
+                System.out.println("  Population in Cities: " + cityPopulation);
+                System.out.println("  Population not in Cities: " + nonCityPopulation);
+                System.out.println();
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+
+
+
+
+
+
+
     ///Start of Erin's work (It's an attempt, we don't need to talk about why it's not working just yet, note that the //* are the acc lines of code) I noticed and Honestly, great Idea.
     //The top N populated cities in a region where N is provided by the user ///*What's Missing here is the Issue Number!!
     public static void Statement16() throws SQLException {
@@ -625,7 +665,8 @@ public class Queries {
     ///End of populated cities in a region
 
     //The top N populated cities in the world where the user provides N
-    //it's similar to the last one, but this time instead of asking for a region its either continent or you can hard-wire continent
+    //it's similar to the last one.
+    // However, this time instead of asking for a region its either continent or you can hard-wire continent,
     //be careful you've named all of them statement 16, which will cause issues later.
     public static void Statement17() throws SQLException {
         //connect to database
@@ -694,7 +735,6 @@ public class Queries {
     public static void Statement19() throws SQLException {
         //connect to database
         try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
-            Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
             //get country from user
             System.out.print("Enter Country: ");
@@ -733,7 +773,6 @@ public class Queries {
     public static void Statement20() throws SQLException {
         //connect to database
         try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
-            Statement stmt = con.createStatement();
             Scanner scanner = new Scanner(System.in);
 
 
@@ -770,4 +809,37 @@ public class Queries {
 
     }
     //End of populated cities in a continent
-}
+
+    //The top N populated capital cities in a region where N is provided by the user
+    public static void Statement21() throws SQLException {
+        //open database
+        try(Connection con = DriverManager.getConnection(DatabaseConfig.jdbcurl(),DatabaseConfig.username(), DatabaseConfig.password())) {
+            Statement stmt = con.createStatement();
+            Scanner scanner = new Scanner(System.in);
+            //get N from user
+            System.out.print("Enter N: ");
+            int n = Integer.parseInt(scanner.nextLine());
+            //implement SQL query
+            String Query = "SELECT city.Name, country.Region, country.Capital, city.Name, city.Population FROM city, country Inner JOIN world.city c on country.Code = c.CountryCode;";
+            ResultSet rs = stmt.executeQuery(Query);
+            //initialize count
+            int count = 0;
+            //loop top N populated countries
+            while (rs.next()) {
+                String Region = rs.getString("Region");
+                String Capital = rs.getString("Capital");
+                int population = rs.getInt("Population");
+                String CityName = rs.getString("Name");
+                System.out.println("City Name: "+ CityName +"Region: "+ Region +", " + "Capital: " + Capital + ", " + "Population: " + population);
+                System.out.println("-----------------------------");
+                count++;
+                //if the count is greater than n then the loop ends
+                if (count >= n) {
+                    break;
+                }
+            }
+            //error message
+        } catch(SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }}
